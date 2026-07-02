@@ -27,8 +27,8 @@ function AppContent({ profile, setProfile }) {
           <Route path="/faq" element={<FAQ />} />
           <Route path="/skills" element={<Skills />} />
           <Route path="/stories" element={<Stories />} />
-          <Route path="/quiz/basic" element={<BasicQuiz />} />
-          <Route path="/quiz/advanced" element={<AdvancedQuiz />} />
+          <Route path="/quiz/basic" element={<BasicQuiz profile={profile} />} />
+          <Route path="/quiz/advanced" element={<AdvancedQuiz profile={profile} />} />
           <Route path="/quiz/open-ended" element={<OpenEndedQuiz profile={profile} />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>

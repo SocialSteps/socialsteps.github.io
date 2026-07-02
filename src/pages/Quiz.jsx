@@ -1,12 +1,17 @@
 import React, { useState, useEffect } from 'react';
+import ReactMarkdown from 'react-markdown';
+import { streamChatCompletion } from '../utils/api';
 
-export default function Quiz({ title, questions }) {
+export default function Quiz({ title, questions, profile }) {
   const [currentIdx, setCurrentIdx] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [showResult, setShowResult] = useState(false);
   const [score, setScore] = useState(0);
   const [isFinished, setIsFinished] = useState(false);
   const [quizQuestions, setQuizQuestions] = useState([]);
+  const [detailedExplanation, setDetailedExplanation] = useState("");
+  const [isExplaining, setIsExplaining] = useState(false);
+  const [explanationRequested, setExplanationRequested] = useState(false);
 
   useEffect(() => {
     const shuffled = [...questions].sort(() => 0.5 - Math.random());
@@ -36,6 +41,9 @@ export default function Quiz({ title, questions }) {
       setCurrentIdx(i => i + 1);
       setSelectedAnswer(null);
       setShowResult(false);
+      setDetailedExplanation("");
+      setIsExplaining(false);
+      setExplanationRequested(false);
     } else {
       setIsFinished(true);
     }
@@ -49,6 +57,42 @@ export default function Quiz({ title, questions }) {
     setIsFinished(false);
     setSelectedAnswer(null);
     setShowResult(false);
+    setDetailedExplanation("");
+    setIsExplaining(false);
+    setExplanationRequested(false);
+  };
+
+  const handleExplainMore = async () => {
+    setExplanationRequested(true);
+    setIsExplaining(true);
+    setDetailedExplanation("");
+
+    const systemPrompt = `You are a gentle, supportive tutor helping ${profile?.name || 'a user'} learn social skills. They are ${profile?.age || 'unknown'} years old. Their strengths include ${profile?.strengths || 'nothing specified'}. They want to improve on ${profile?.improve || 'nothing specified'}. The user has just answered a multiple-choice question.
+If they got it wrong, gently explain why the correct answer is right and why their choice was incorrect. Never make them feel bad.
+If they got it right, praise them and provide more context on why it's a great choice.
+Keep your explanation simple, clear, and encouraging. Use short paragraphs and personalize the response using their name or interests when appropriate.`;
+
+    const userPrompt = `Scenario: ${currentQ.context}\nQuestion: ${currentQ.question}\nChoices: ${currentQ.choices.join(', ')}\nCorrect Answer: ${currentQ.answer}\nMy Answer: ${selectedAnswer}`;
+
+    try {
+      let accumulated = "";
+      await streamChatCompletion(
+        [
+          { role: 'system', content: systemPrompt },
+          { role: 'user', content: userPrompt }
+        ],
+        (chunk) => {
+          accumulated += chunk;
+          setDetailedExplanation(accumulated);
+        },
+        () => {
+          setIsExplaining(false);
+        }
+      );
+    } catch (e) {
+      setDetailedExplanation("Failed to get explanation. Please try again.");
+      setIsExplaining(false);
+    }
   };
 
   if (isFinished) {
@@ -148,9 +192,26 @@ export default function Quiz({ title, questions }) {
               {selectedAnswer === currentQ.answer ? '🎉 Correct!' : '❌ Incorrect'}
             </h4>
             <p style={{ fontSize: '1.2rem', lineHeight: '1.6', marginBottom: '25px' }}>{currentQ.explanation}</p>
-            <button className="btn btn-primary" onClick={nextQuestion} style={{ fontSize: '1.1rem', padding: '12px 30px' }}>
-              {currentIdx + 1 < quizQuestions.length ? 'Next Question →' : 'Finish Quiz'}
-            </button>
+            
+            <div style={{ display: 'flex', gap: '15px', marginBottom: explanationRequested ? '25px' : '0' }}>
+              <button 
+                className="btn btn-secondary" 
+                onClick={handleExplainMore} 
+                disabled={explanationRequested}
+                style={{ fontSize: '1.1rem', padding: '12px 30px', flex: 1, opacity: explanationRequested ? 0.6 : 1 }}
+              >
+                Explain More 🤖
+              </button>
+              <button className="btn btn-primary" onClick={nextQuestion} style={{ fontSize: '1.1rem', padding: '12px 30px', flex: 1 }}>
+                {currentIdx + 1 < quizQuestions.length ? 'Next Question →' : 'Finish Quiz'}
+              </button>
+            </div>
+
+            {explanationRequested && (
+              <div className="chat-markdown animate-fade-in" style={{ marginTop: '20px', padding: '20px', background: 'rgba(155, 93, 229, 0.1)', borderRadius: '12px', borderLeft: '4px solid var(--primary)', textAlign: 'left', fontSize: '1.1rem', lineHeight: '1.6' }}>
+                <ReactMarkdown>{detailedExplanation || "Thinking..."}</ReactMarkdown>
+              </div>
+            )}
           </div>
         )}
       </div>
