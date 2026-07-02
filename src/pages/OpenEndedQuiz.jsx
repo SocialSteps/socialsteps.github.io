@@ -174,11 +174,11 @@ Your response MUST ALWAYS start with either the exact word 'Correct' or the exac
 
         <textarea 
           className="input-glass"
-          style={{ width: '100%', height: '150px', resize: 'none', marginBottom: '20px' }}
+          style={{ width: '100%', height: '150px', resize: 'none', marginBottom: '20px', opacity: (isEvaluating || !!feedback) ? 0.7 : 1 }}
           placeholder="Type what you would say or do here..."
           value={answer}
           onChange={(e) => setAnswer(e.target.value)}
-          disabled={!!feedback}
+          readOnly={isEvaluating || !!feedback}
         />
         
         {!feedback && (
