@@ -16,7 +16,7 @@ export default function Sidebar({ profile, onSignOut }) {
 
   return (
     <div className="sidebar glass-panel">
-      <div style={{ textAlign: 'center', marginBottom: '30px' }}>
+      <div className="profile-header" style={{ textAlign: 'center', marginBottom: '30px' }}>
         <div style={{ 
           width: '80px', 
           height: '80px', 
@@ -34,7 +34,7 @@ export default function Sidebar({ profile, onSignOut }) {
         <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>Current Profile</p>
       </div>
 
-      <nav style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '8px' }}>
+      <nav className="mobile-nav" style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '8px' }}>
         {navItems.map((item) => (
           <NavLink
             key={item.to}

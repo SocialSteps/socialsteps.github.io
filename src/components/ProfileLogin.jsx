@@ -143,7 +143,7 @@ export default function ProfileLogin({ onLogin }) {
 
   if (authMode === null) {
     return (
-      <div className="glass-panel" style={{ maxWidth: '600px', margin: '100px auto', padding: '60px 40px', textAlign: 'center' }}>
+      <div className="glass-panel profile-login-container">
         <h1 style={{ fontSize: '2.5rem', marginBottom: '20px' }}>Welcome to SocialSteps!</h1>
         <p style={{ fontSize: '1.2rem', marginBottom: '50px', color: 'var(--text-main)' }}>We're so glad you're here! Are you new, or have you been here before?</p>
         
@@ -169,7 +169,7 @@ export default function ProfileLogin({ onLogin }) {
   }
 
   return (
-    <div className="glass-panel" style={{ maxWidth: '600px', margin: '100px auto', padding: '40px', textAlign: 'center' }}>
+    <div className="glass-panel profile-login-container" style={{ padding: '40px' }}>
       <h1>{authMode === 'register' ? 'Create a Profile' : 'Welcome Back!'}</h1>
       <p style={{ marginBottom: '30px' }}>
         {authMode === 'register' 
