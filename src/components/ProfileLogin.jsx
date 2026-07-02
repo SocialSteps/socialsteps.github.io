@@ -26,7 +26,7 @@ const commonStrengths = ['Being a good friend', 'Following rules', 'Listening to
 const commonWeaknesses = ['Talking too loud', 'Getting frustrated easily', 'Waiting for my turn', 'Making eye contact', 'Trying new things', 'Focusing for a long time', 'Sitting still'];
 
 export default function ProfileLogin({ onLogin }) {
-  const [isRegistering, setIsRegistering] = useState(false);
+  const [authMode, setAuthMode] = useState(null);
   const [name, setName] = useState('');
   const [age, setAge] = useState('');
   const [likes, setLikes] = useState('');
@@ -102,7 +102,7 @@ export default function ProfileLogin({ onLogin }) {
 
     const API_BASE = import.meta.env.VITE_API_BASE_URL || '/api';
     try {
-      if (isRegistering) {
+      if (authMode === 'register') {
         const res = await fetch(`${API_BASE}/profiles/register`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -141,11 +141,38 @@ export default function ProfileLogin({ onLogin }) {
     }
   };
 
+  if (authMode === null) {
+    return (
+      <div className="glass-panel" style={{ maxWidth: '600px', margin: '100px auto', padding: '60px 40px', textAlign: 'center' }}>
+        <h1 style={{ fontSize: '2.5rem', marginBottom: '20px' }}>Welcome to SocialSteps!</h1>
+        <p style={{ fontSize: '1.2rem', marginBottom: '50px', color: 'var(--text-main)' }}>We're so glad you're here! Are you new, or have you been here before?</p>
+        
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', alignItems: 'center' }}>
+          <button 
+            className="btn btn-primary" 
+            style={{ fontSize: '1.4rem', padding: '20px 40px', width: '100%', maxWidth: '400px' }}
+            onClick={() => setAuthMode('register')}
+          >
+            I'm New Here! ✨
+          </button>
+          
+          <button 
+            className="btn btn-secondary" 
+            style={{ fontSize: '1.4rem', padding: '20px 40px', width: '100%', maxWidth: '400px' }}
+            onClick={() => setAuthMode('login')}
+          >
+            I've Been Here Before! 👋
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="glass-panel" style={{ maxWidth: '600px', margin: '100px auto', padding: '40px', textAlign: 'center' }}>
-      <h1>{isRegistering ? 'Create a Profile' : 'Welcome Back!'}</h1>
+      <h1>{authMode === 'register' ? 'Create a Profile' : 'Welcome Back!'}</h1>
       <p style={{ marginBottom: '30px' }}>
-        {isRegistering 
+        {authMode === 'register' 
           ? "Let's set up your secret animal and color. You will use these to log in!" 
           : "Choose your secret animal and color to log in."}
       </p>
@@ -165,7 +192,7 @@ export default function ProfileLogin({ onLogin }) {
           />
         </div>
 
-        {isRegistering && (
+        {authMode === 'register' && (
           <div ref={wrapperRef} style={{ marginBottom: '30px', display: 'flex', flexDirection: 'column', gap: '15px', alignItems: 'center' }}>
             <h3 style={{ color: 'var(--primary)' }}>Tell us more about yourself!</h3>
             <input 
@@ -283,7 +310,7 @@ export default function ProfileLogin({ onLogin }) {
         </div>
 
         <button type="submit" className="btn btn-primary" style={{ fontSize: '1.2rem', padding: '16px 40px' }}>
-          {isRegistering ? 'Create Profile & Login' : 'Login'}
+          {authMode === 'register' ? 'Create Profile & Login' : 'Login'}
         </button>
       </form>
 
@@ -291,9 +318,9 @@ export default function ProfileLogin({ onLogin }) {
         <button 
           type="button" 
           className="btn btn-secondary" 
-          onClick={() => { setIsRegistering(!isRegistering); setError(''); }}
+          onClick={() => { setAuthMode(authMode === 'register' ? 'login' : 'register'); setError(''); }}
         >
-          {isRegistering ? 'I already have a profile' : 'I need to create a new profile'}
+          {authMode === 'register' ? 'I already have a profile' : 'I need to create a new profile'}
         </button>
       </div>
     </div>
