@@ -15818,7 +15818,8 @@ export const socialStories = [
             "We have to walk up and down the aisles to find our food. I need to stay close to my parent.",
             "When we are done, we wait in line to pay. Waiting can be boring, but it is important to be patient.",
             "When we are finished paying, we can go home. I did a great job at the grocery store!"
-        ]
+        ],
+        "category": "Community Participation Skills"
     },
     {
         "title": "When I Feel Frustrated",
@@ -15828,7 +15829,8 @@ export const socialStories = [
             "Instead of yelling, I can take a deep breath. In through my nose, out through my mouth.",
             "I can use my words and say, 'I am feeling frustrated. I need a break.'",
             "Taking a break helps my body calm down. When I am calm, I can try again."
-        ]
+        ],
+        "category": "Basic Living Skills"
     },
     {
         "title": "Riding the School Bus",
@@ -15839,7 +15841,8 @@ export const socialStories = [
             "The bus can be noisy. If it is too loud, I can look out the window or wear my headphones.",
             "When the bus stops at my school or my house, I stand up and walk off carefully.",
             "Riding the bus is easy when I follow the rules!"
-        ]
+        ],
+        "category": "School Skills"
     },
     {
         "title": "Raising My Hand in Class",
@@ -15850,7 +15853,8 @@ export const socialStories = [
             "I put my hand up high and keep my mouth quiet while I wait.",
             "The teacher will call my name when it is my turn to speak.",
             "Raising my hand shows respect to my teacher and my classmates."
-        ]
+        ],
+        "category": "School Skills"
     },
     {
         "title": "A Fire Drill at School",
@@ -15861,7 +15865,8 @@ export const socialStories = [
             "I will line up quietly with my class at the door.",
             "We will walk outside together. I must stay with my teacher and be very quiet.",
             "When the drill is over, the alarm stops, and we go back inside. I did a great job staying calm!"
-        ]
+        ],
+        "category": "School Skills"
     },
     {
         "title": "Eating in the Cafeteria",
@@ -15872,7 +15877,8 @@ export const socialStories = [
             "I need to chew my food with my mouth closed and stay in my seat.",
             "If I need help opening something, I can raise my hand and ask a teacher.",
             "When I am finished, I clean up my trash. Eating lunch gives me energy for the rest of the day."
-        ]
+        ],
+        "category": "School Skills"
     },
     {
         "title": "Having a Substitute Teacher",
@@ -15883,7 +15889,8 @@ export const socialStories = [
             "I might feel worried because the routine changed, but I can stay calm.",
             "I will follow the substitute teacher's directions and show them how we do things.",
             "My regular teacher will be back soon, and I can be proud of how well I listened."
-        ]
+        ],
+        "category": "School Skills"
     },
     {
         "title": "Asking to Join a Game",
@@ -15894,7 +15901,8 @@ export const socialStories = [
             "Then, I can ask with a friendly voice, 'Can I play with you?'",
             "If they say yes, I can join the fun and follow their rules.",
             "If they say no, that is okay. I can go find something else fun to do."
-        ]
+        ],
+        "category": "School Skills"
     },
     {
         "title": "Losing a Game",
@@ -15905,7 +15913,8 @@ export const socialStories = [
             "But it is just a game. I can take a deep breath and stay calm.",
             "I can say, 'Good game!' to my friends.",
             "Being a good sport makes people want to play with me again."
-        ]
+        ],
+        "category": "Basic Living Skills"
     },
     {
         "title": "Sharing Toys",
@@ -15916,7 +15925,8 @@ export const socialStories = [
             "When it is my turn, I can play with it for a little while.",
             "Then, I can share it back so everyone gets a turn.",
             "Sharing makes playing together fair and fun for everyone."
-        ]
+        ],
+        "category": "Basic Living Skills"
     },
     {
         "title": "Giving Personal Space",
@@ -15927,7 +15937,8 @@ export const socialStories = [
             "If I want to touch someone or give a hug, I have to ask first.",
             "If they say no, I respect their body and do not touch them.",
             "Keeping good personal space shows that I care about others' feelings."
-        ]
+        ],
+        "category": "Basic Living Skills"
     },
     {
         "title": "When Someone Says No",
@@ -15938,7 +15949,8 @@ export const socialStories = [
             "I might want to argue or whine, but that will not change the answer.",
             "Instead, I can take a deep breath and accept the answer.",
             "Saying 'okay' when someone says no shows that I am mature and flexible."
-        ]
+        ],
+        "category": "Basic Living Skills"
     },
     {
         "title": "Feeling Anxious or Worried",
@@ -15949,7 +15961,8 @@ export const socialStories = [
             "When I feel this way, I can squeeze my hands tight and then let them go.",
             "I can talk to a trusted adult and say, 'I feel worried about this.'",
             "Adults can help me feel safe until the worried feeling floats away."
-        ]
+        ],
+        "category": "Basic Living Skills"
     },
     {
         "title": "Making a Mistake",
@@ -15960,7 +15973,8 @@ export const socialStories = [
             "I can say, 'Oops, I made a mistake!'",
             "I can ask for help to clean it up or try to fix it.",
             "Mistakes are how our brains learn to do things better next time."
-        ]
+        ],
+        "category": "Home Skills"
     },
     {
         "title": "When Plans Change",
@@ -15971,7 +15985,8 @@ export const socialStories = [
             "I can remind myself: 'Plans change, and I can be flexible like a rubber band.'",
             "I can ask, 'What are we going to do instead?'",
             "I might discover that the new plan is just as fun as the old one."
-        ]
+        ],
+        "category": "Community Participation Skills"
     },
     {
         "title": "Feeling Sad",
@@ -15982,7 +15997,8 @@ export const socialStories = [
             "I can find a quiet place to sit, or I can ask someone I love for a hug.",
             "I can do something calming, like drawing a picture or listening to music.",
             "Eventually, the heavy feeling goes away, and I will feel like smiling again."
-        ]
+        ],
+        "category": "Basic Living Skills"
     },
     {
         "title": "Going to the Doctor",
@@ -15993,7 +16009,8 @@ export const socialStories = [
             "The doctor will look in my ears, listen to my heart, and ask me questions.",
             "Sometimes they use cold tools, but they are just checking my health.",
             "I sit still and follow their directions. Soon, the visit is over and I can go home."
-        ]
+        ],
+        "category": "Community Participation Skills"
     },
     {
         "title": "Going to a Restaurant",
@@ -16004,7 +16021,8 @@ export const socialStories = [
             "While the food is cooking, we have to wait patiently at the table without running around.",
             "When the food arrives, I use my manners and say 'Please' and 'Thank you'.",
             "Restaurants are fun when everyone uses their best inside voices."
-        ]
+        ],
+        "category": "Community Participation Skills"
     },
     {
         "title": "Visiting the Library",
@@ -16015,7 +16033,8 @@ export const socialStories = [
             "I can look at many books, but I only take the ones I want to borrow.",
             "When I am ready, I take my books to the librarian to check them out.",
             "I will take good care of the books at home and bring them back when I am done."
-        ]
+        ],
+        "category": "Community Participation Skills"
     },
     {
         "title": "Brushing My Teeth",
@@ -16026,9 +16045,10 @@ export const socialStories = [
             "I brush the front, the back, and the top of all my teeth. I do this for two minutes.",
             "When I am done, I spit the toothpaste into the sink and rinse my mouth.",
             "Now my teeth are clean, shiny, and ready for the day or for sleeping!"
-        ]
+        ],
+        "category": "Home Skills"
     },
-{
+    {
         "title": "Taking a Test",
         "pages": [
             "Sometimes at school, the teacher gives us a test to see what we have learned.",
@@ -16036,7 +16056,8 @@ export const socialStories = [
             "I will try my best to answer the questions. If I don't know one, I can skip it and come back.",
             "If I need help understanding a question, I can raise my hand quietly.",
             "A test is just a way to show my brain is growing. I don't need to worry."
-        ]
+        ],
+        "category": "School Skills"
     },
     {
         "title": "Working in a Group",
@@ -16046,7 +16067,8 @@ export const socialStories = [
             "If I want to share my idea, I have to wait until my classmate is finished talking.",
             "We might not use my idea every time, and that is okay.",
             "When we work together and share, we can make a really great project!"
-        ]
+        ],
+        "category": "School Skills"
     },
     {
         "title": "Going to an Assembly",
@@ -16056,7 +16078,8 @@ export const socialStories = [
             "I need to walk quietly with my class and sit where my teacher tells me.",
             "During the assembly, I keep my hands to myself and listen to the speaker.",
             "When it is over, I wait for my teacher's signal to stand up and walk back to class."
-        ]
+        ],
+        "category": "School Skills"
     },
     {
         "title": "When the Teacher is Busy",
@@ -16066,7 +16089,8 @@ export const socialStories = [
             "I cannot interrupt or shout the teacher's name. I need to wait.",
             "I can raise my hand, or I can try to do a different part of my work while I wait.",
             "The teacher will come to help me as soon as they are finished."
-        ]
+        ],
+        "category": "School Skills"
     },
     {
         "title": "Waiting in Line",
@@ -16076,7 +16100,8 @@ export const socialStories = [
             "I must keep my hands and feet to myself so everyone stays safe.",
             "I cannot push to the front. Everyone gets a turn.",
             "Standing nicely in line helps our class get where we are going faster!"
-        ]
+        ],
+        "category": "School Skills"
     },
     {
         "title": "Asking Someone to Stop",
@@ -16086,7 +16111,8 @@ export const socialStories = [
             "I can use a strong, calm voice and say, 'Please stop doing that.'",
             "Usually, people will stop when I ask them nicely.",
             "If they do not stop, I can walk away or ask a teacher for help."
-        ]
+        ],
+        "category": "School Skills"
     },
     {
         "title": "Giving a Compliment",
@@ -16096,7 +16122,8 @@ export const socialStories = [
             "I can look at them and say, 'I really like your drawing!'",
             "Giving a compliment makes the other person feel happy and proud.",
             "When I make others feel happy, it makes me a kind and friendly person."
-        ]
+        ],
+        "category": "Basic Living Skills"
     },
     {
         "title": "Apologizing",
@@ -16106,7 +16133,8 @@ export const socialStories = [
             "I can look at them and say, 'I am sorry I bumped into you. Are you okay?'",
             "They might say 'It is okay' or they might need a minute to feel better.",
             "Saying sorry fixes mistakes and helps keep friendships strong."
-        ]
+        ],
+        "category": "Basic Living Skills"
     },
     {
         "title": "Someone is Sitting in My Spot",
@@ -16116,7 +16144,8 @@ export const socialStories = [
             "I might feel upset, but I cannot push them or yell at them to move.",
             "I can politely ask, 'Excuse me, were you sitting here?'",
             "If they stay, I need to be flexible and choose a different spot. It is just a place to sit."
-        ]
+        ],
+        "category": "Basic Living Skills"
     },
     {
         "title": "Playing a New Game",
@@ -16126,7 +16155,8 @@ export const socialStories = [
             "That is okay! I can watch how other people play to learn.",
             "I can ask my friends, 'Can you explain the rules to me again?'",
             "The more I practice, the better I will understand the new game."
-        ]
+        ],
+        "category": "Basic Living Skills"
     },
     {
         "title": "Feeling Jealous",
@@ -16136,7 +16166,8 @@ export const socialStories = [
             "It is normal to feel jealous, but I cannot take their thing or be mean.",
             "I can take a deep breath and tell them, 'Wow, that is really cool.'",
             "I can remember all the special things I have to be thankful for."
-        ]
+        ],
+        "category": "Basic Living Skills"
     },
     {
         "title": "Being Teased",
@@ -16146,7 +16177,8 @@ export const socialStories = [
             "I do not have to listen to them. I can use my words and say 'Stop.'",
             "I can turn around and walk away from the person teasing me.",
             "I can go tell an adult what happened. An adult will help me stay safe."
-        ]
+        ],
+        "category": "Basic Living Skills"
     },
     {
         "title": "Feeling Tired",
@@ -16156,7 +16188,8 @@ export const socialStories = [
             "I can tell a grown-up, 'I am feeling very tired right now.'",
             "I can ask for a quiet activity, like reading a book or resting my eyes.",
             "Resting helps my brain and body recharge so I can feel good again."
-        ]
+        ],
+        "category": "School Skills"
     },
     {
         "title": "Feeling Too Excited",
@@ -16166,7 +16199,8 @@ export const socialStories = [
             "If I am too loud or run around inside, I might accidentally break something or hurt someone.",
             "I can take a deep breath and squeeze my hands to keep my excitement safe.",
             "I can use my words to say, 'I am so excited!' instead of shouting."
-        ]
+        ],
+        "category": "Community Participation Skills"
     },
     {
         "title": "Making a Bad Choice",
@@ -16176,7 +16210,8 @@ export const socialStories = [
             "I cannot argue or yell. I need to listen to what they are saying.",
             "I can say, 'I am sorry, I will try to make a better choice next time.'",
             "Making a bad choice does not mean I am a bad kid. It just means I am learning."
-        ]
+        ],
+        "category": "Basic Living Skills"
     },
     {
         "title": "Taking a Shower",
@@ -16186,7 +16221,8 @@ export const socialStories = [
             "I use soap to wash my arms, legs, tummy, and back.",
             "I use shampoo to wash the dirt and sweat out of my hair.",
             "When I am clean, I turn the water off and dry my whole body with a towel."
-        ]
+        ],
+        "category": "Home Skills"
     },
     {
         "title": "Getting a Haircut",
@@ -16196,7 +16232,8 @@ export const socialStories = [
             "The buzzing sound and the hair falling on my neck might feel ticklish or scratchy.",
             "I must sit very still like a statue so the person can cut my hair safely.",
             "When they are done, they will brush the loose hair off, and I will look great!"
-        ]
+        ],
+        "category": "Community Participation Skills"
     },
     {
         "title": "Trying New Foods",
@@ -16206,7 +16243,8 @@ export const socialStories = [
             "I might feel unsure, but my parents want me to grow strong and healthy.",
             "I can take one small 'no thank you' bite to see what it tastes like.",
             "If I like it, I can eat more! If I don't like it, I can politely say, 'I don't care for this.'"
-        ]
+        ],
+        "category": "Home Skills"
     },
     {
         "title": "Waking Up in the Morning",
@@ -16216,7 +16254,8 @@ export const socialStories = [
             "But I have to get up so I can get ready for the day.",
             "I will stretch my arms, get out of bed, and put on my clothes.",
             "Starting the morning with a good attitude helps me have a wonderful day."
-        ]
+        ],
+        "category": "Home Skills"
     },
     {
         "title": "Getting Ready for Bed",
@@ -16226,9 +16265,10 @@ export const socialStories = [
             "I will put on my pajamas, brush my teeth, and use the bathroom.",
             "I might read a book or listen to a quiet story before the lights go out.",
             "I close my eyes, stay in my bed, and go to sleep until morning."
-        ]
+        ],
+        "category": "Home Skills"
     },
-{
+    {
         "title": "Washing My Hands",
         "pages": [
             "I need to wash my hands after using the bathroom, playing outside, and before eating.",
@@ -16236,7 +16276,8 @@ export const socialStories = [
             "Next, I use soap and rub my hands together to make lots of bubbles.",
             "I wash the front, the back, and in between all of my fingers.",
             "Finally, I rinse the bubbles off with water and dry my hands with a towel. Now they are clean!"
-        ]
+        ],
+        "category": "Home Skills"
     },
     {
         "title": "Crossing the Street",
@@ -16246,7 +16287,8 @@ export const socialStories = [
             "We stop at the edge of the sidewalk and look left, right, and left again.",
             "If a car is coming, we wait. We never run into the street.",
             "We only cross when the road is completely clear and safe."
-        ]
+        ],
+        "category": "Community Participation Skills"
     },
     {
         "title": "Going to a Birthday Party",
@@ -16256,7 +16298,8 @@ export const socialStories = [
             "When it is time for cake, people will sing. I can cover my ears if the singing is too loud.",
             "I will wait patiently for my piece of cake and I will not grab.",
             "When it is time to go, I say 'Thank you for having me!' before I leave."
-        ]
+        ],
+        "category": "Community Participation Skills"
     },
     {
         "title": "Having a Babysitter",
@@ -16266,7 +16309,8 @@ export const socialStories = [
             "They might do things a little differently than my parents, and that is okay.",
             "I will follow the babysitter's rules, be polite, and play nicely.",
             "My parents will come back when they are finished with their trip."
-        ]
+        ],
+        "category": "Home Skills"
     },
     {
         "title": "Doing My Homework",
@@ -16276,7 +16320,8 @@ export const socialStories = [
             "I will sit at a table or desk with my pencils and paper to focus.",
             "If I get stuck on a hard problem, I can ask a parent or older sibling for help.",
             "When I finish my homework, my responsibilities are done and I can go play."
-        ]
+        ],
+        "category": "School Skills"
     },
     {
         "title": "Cleaning My Room",
@@ -16286,7 +16331,8 @@ export const socialStories = [
             "When it is time to clean up, I put my toys back in their correct bins.",
             "I put my dirty clothes in the hamper and my books neatly on the shelf.",
             "A clean room feels nice, looks great, and helps me relax."
-        ]
+        ],
+        "category": "Home Skills"
     },
     {
         "title": "When Someone is Crying",
@@ -16296,7 +16342,8 @@ export const socialStories = [
             "I can give them personal space, or I can softly ask, 'Are you okay?'",
             "I can also offer to get a grown-up to help them feel better.",
             "Being kind and patient when someone is sad makes me a very good friend."
-        ]
+        ],
+        "category": "Basic Living Skills"
     },
     {
         "title": "Going to the Movies",
@@ -16306,7 +16353,8 @@ export const socialStories = [
             "The sound can be very loud. It is okay to wear my headphones if I need to.",
             "I must stay in my seat and use a quiet whisper voice so others can hear the movie.",
             "Watching movies is fun when everyone is quiet and respectful."
-        ]
+        ],
+        "category": "Home Skills"
     },
     {
         "title": "Wearing a Seatbelt",
@@ -16316,7 +16364,8 @@ export const socialStories = [
             "It might feel a little snug, but it is there to keep my body safe if the car stops fast.",
             "I keep my seatbelt clicked the entire time the car is moving.",
             "When the car is parked and turned off, I can unclick it and get out."
-        ]
+        ],
+        "category": "Community Participation Skills"
     },
     {
         "title": "Interrupting",
@@ -16326,7 +16375,8 @@ export const socialStories = [
             "If it is an emergency, I can say 'Excuse me' to safely get their attention.",
             "If it is not an emergency, I must wait quietly until they are completely finished.",
             "Waiting my turn to speak shows that I am a good listener and respectful."
-        ]
+        ],
+        "category": "Basic Living Skills"
     },
     {
         "title": "Going to a Friend's House",
@@ -16336,7 +16386,8 @@ export const socialStories = [
             "I need to listen to my friend's parents and follow their rules while I am there.",
             "My friend and I have to share the toys and decide together what we want to play.",
             "When it is time to leave, I say 'Thank you for having me' and go home without complaining."
-        ]
+        ],
+        "category": "Home Skills"
     },
     {
         "title": "When I Get Lost",
@@ -16346,7 +16397,8 @@ export const socialStories = [
             "I can look for a safe adult, like a police officer, a security guard, or a mom with kids.",
             "I can say, 'I am lost. Can you help me find my parents?'",
             "My parents are looking for me too, and asking for help will get us back together safely."
-        ]
+        ],
+        "category": "Community Participation Skills"
     },
     {
         "title": "Trying a New Activity",
@@ -16356,7 +16408,8 @@ export const socialStories = [
             "It is okay to be a beginner. Every expert started as a beginner once.",
             "I will watch the teacher carefully, listen to the instructions, and try my best.",
             "Even if I make mistakes, I can still have fun learning something new."
-        ]
+        ],
+        "category": "School Skills"
     },
     {
         "title": "Playing at the Park",
@@ -16366,7 +16419,8 @@ export const socialStories = [
             "If someone is using the swing I want, I will wait my turn safely away from their feet.",
             "I will go down the slide safely on my bottom, feet first.",
             "When it is time to go home, I will listen to my parents and leave when they say."
-        ]
+        ],
+        "category": "Community Participation Skills"
     },
     {
         "title": "When I am Sick",
@@ -16376,7 +16430,8 @@ export const socialStories = [
             "I will stay in bed, drink plenty of water, and take my medicine if my parents give it to me.",
             "I will cover my mouth with my elbow when I cough or sneeze to protect others.",
             "Soon my body will heal, and I will feel healthy and strong again."
-        ]
+        ],
+        "category": "Home Skills"
     },
     {
         "title": "Saying Thank You",
@@ -16386,7 +16441,8 @@ export const socialStories = [
             "I can look at the person, smile, and say the words clearly.",
             "Even if I do not love the gift, I can still say thank you for the nice thought.",
             "Using polite words like thank you makes other people feel happy and appreciated."
-        ]
+        ],
+        "category": "Basic Living Skills"
     },
     {
         "title": "Meeting Someone New",
@@ -16396,7 +16452,8 @@ export const socialStories = [
             "They will usually say hello back and tell me what their name is.",
             "I can ask them a friendly question, like 'What do you like to play?'",
             "Meeting new people is the first step to making new friends."
-        ]
+        ],
+        "category": "Basic Living Skills"
     },
     {
         "title": "When My Clothes Feel Uncomfortable",
@@ -16406,7 +16463,8 @@ export const socialStories = [
             "Instead of getting angry, I can use my words and tell an adult, 'My clothes are uncomfortable.'",
             "They can help me cut off the tag, adjust the seam, or change into something softer.",
             "Using my words helps solve the problem much faster."
-        ]
+        ],
+        "category": "Basic Living Skills"
     },
     {
         "title": "Going to the Dentist",
@@ -16416,7 +16474,8 @@ export const socialStories = [
             "The dentist will use a bright light and small mirrors to look inside my mouth.",
             "I must open my mouth very wide like a hippopotamus and hold very still.",
             "When they are done, my teeth will be clean and I might even get a new toothbrush!"
-        ]
+        ],
+        "category": "Community Participation Skills"
     },
     {
         "title": "Riding in a Car for a Long Time",
@@ -16426,9 +16485,10 @@ export const socialStories = [
             "I can bring books, small toys, or listen to music to keep myself busy and happy.",
             "I cannot unbuckle my seatbelt, kick the seats, or distract the driver.",
             "When we finally arrive at our destination, I can stretch my legs and have fun!"
-        ]
+        ],
+        "category": "School Skills"
     },
-{
+    {
         "title": "Using a Public Restroom",
         "pages": [
             "A public restroom is a place to go to the bathroom when I am away from home.",
@@ -16436,7 +16496,8 @@ export const socialStories = [
             "The automatic toilets and hand dryers can be very loud. I can cover my ears if I need to.",
             "I will go into a stall, lock the door, use the toilet, and flush.",
             "When I am done, I wash my hands with soap and water, dry them, and leave."
-        ]
+        ],
+        "category": "Home Skills"
     },
     {
         "title": "Going to the Eye Doctor",
@@ -16446,7 +16507,8 @@ export const socialStories = [
             "They might ask me to read letters or point to pictures on a screen.",
             "Sometimes they put drops in my eyes. It feels a little wet, but it doesn't hurt.",
             "If I need glasses, I get to pick out cool frames to help me see clearly!"
-        ]
+        ],
+        "category": "Community Participation Skills"
     },
     {
         "title": "Getting a Bug Bite",
@@ -16456,7 +16518,8 @@ export const socialStories = [
             "I must not scratch the bug bite, because scratching can make it bleed or hurt.",
             "Instead of scratching, I can ask an adult for some special anti-itch cream or a band-aid.",
             "In a few days, the bug bite will disappear all by itself."
-        ]
+        ],
+        "category": "Basic Living Skills"
     },
     {
         "title": "When Someone is Teasing My Friend",
@@ -16466,7 +16529,8 @@ export const socialStories = [
             "I can use a strong voice and tell the person, 'Please stop, that is not nice.'",
             "I can put my arm around my friend and say, 'Let's go play somewhere else.'",
             "Then, I can tell a teacher or safe adult what happened so they can help."
-        ]
+        ],
+        "category": "School Skills"
     },
     {
         "title": "Secrets vs. Surprises",
@@ -16476,7 +16540,8 @@ export const socialStories = [
             "A secret is something someone tells me to hide, especially if it makes me feel unsafe or worried.",
             "I should never keep a secret that makes me feel bad or hurts someone.",
             "If someone asks me to keep a bad secret, I must go tell a safe adult immediately."
-        ]
+        ],
+        "category": "Basic Living Skills"
     },
     {
         "title": "Answering the Telephone",
@@ -16486,7 +16551,8 @@ export const socialStories = [
             "The person might ask to speak to my mom or dad.",
             "I can politely say, 'Just a minute, please,' and go find my parent.",
             "I never give out my name or address to strangers on the phone."
-        ]
+        ],
+        "category": "Home Skills"
     },
     {
         "title": "Going on an Airplane",
@@ -16496,7 +16562,8 @@ export const socialStories = [
             "When we get on the plane, I sit in my seat and buckle my seatbelt across my lap.",
             "When the plane goes up, my ears might feel funny. Swallowing or yawning helps them feel better.",
             "I can read, sleep, or watch a movie while the pilot flies us safely to our destination."
-        ]
+        ],
+        "category": "School Skills"
     },
     {
         "title": "Sitting in a Waiting Room",
@@ -16506,7 +16573,8 @@ export const socialStories = [
             "I cannot run around or shout, because other people are trying to read or rest.",
             "I can sit quietly in my chair and play with a small toy or read a book.",
             "When they call my name, my waiting is done and it is my turn!"
-        ]
+        ],
+        "category": "Community Participation Skills"
     },
     {
         "title": "Feeling Embarrassed",
@@ -16516,7 +16584,8 @@ export const socialStories = [
             "It is not a bad feeling, it just feels uncomfortable. Everyone gets embarrassed sometimes.",
             "I do not need to cry or hide. I can take a deep breath and tell myself, 'It is okay.'",
             "I can smile or say 'Oops!' and just move on with my day."
-        ]
+        ],
+        "category": "Basic Living Skills"
     },
     {
         "title": "Going to the Swimming Pool",
@@ -16526,7 +16595,8 @@ export const socialStories = [
             "I must always use walking feet. Running near the pool is dangerous and I could fall.",
             "I only get into the water when an adult is watching me.",
             "When it is time to leave, I wrap up in a cozy towel and dry off."
-        ]
+        ],
+        "category": "Basic Living Skills"
     },
     {
         "title": "Hearing a Dog Bark",
@@ -16536,7 +16606,8 @@ export const socialStories = [
             "If a dog barks, I should not scream or run away, because running makes dogs want to chase.",
             "I can stand very still like a tree, or I can walk away slowly and calmly.",
             "I should always ask the owner, 'Can I pet your dog?' before touching a dog I do not know."
-        ]
+        ],
+        "category": "Basic Living Skills"
     },
     {
         "title": "Wearing Sunscreen",
@@ -16546,7 +16617,8 @@ export const socialStories = [
             "To protect my skin, my parents rub sunscreen lotion all over my arms, legs, and face.",
             "It might feel cold, wet, or sticky at first, but it rubs in quickly.",
             "Sunscreen is like a magical invisible shield that keeps my skin healthy and safe!"
-        ]
+        ],
+        "category": "Home Skills"
     },
     {
         "title": "Seeing First Responders",
@@ -16556,7 +16628,8 @@ export const socialStories = [
             "The sirens are loud so cars know to move out of the way, but they mean help is coming.",
             "If I ever feel unsafe, or if there is an emergency, I can always go to a First Responder.",
             "Their job is to protect me and make sure everyone is safe."
-        ]
+        ],
+        "category": "Vocational Skills"
     },
     {
         "title": "When I Don't Understand Instructions",
@@ -16567,7 +16640,8 @@ export const socialStories = [
             "I can raise my hand quietly and wait for the teacher.",
             "When they come over, I can say, 'Can you please repeat the instructions? I didn't understand.'",
             "The teacher will be happy to help me!"
-        ]
+        ],
+        "category": "School Skills"
     },
     {
         "title": "When a Friend Needs Space",
@@ -16577,7 +16651,8 @@ export const socialStories = [
             "It just means their brain or body needs a quiet break to feel calm.",
             "I will be a good friend and say 'Okay' and walk away.",
             "I can go play with a different friend or do an activity by myself until they are ready to play again."
-        ]
+        ],
+        "category": "Basic Living Skills"
     },
     {
         "title": "Going to the Shopping Mall",
@@ -16587,7 +16662,8 @@ export const socialStories = [
             "I must stay very close to my family and not wander off.",
             "If the noises get too loud or the smells are too strong, I can ask my parent for a short break.",
             "We might sit on a bench or go to a quieter part of the mall to rest before we keep shopping."
-        ]
+        ],
+        "category": "Community Participation Skills"
     },
     {
         "title": "When the Internet or iPad Stops Working",
@@ -16598,7 +16674,8 @@ export const socialStories = [
             "Hitting the screen or yelling will not fix the technology.",
             "I can take a deep breath, plug the device into the charger, and ask an adult for help.",
             "While I wait for it to work again, I can play with my toys or read a book."
-        ]
+        ],
+        "category": "Vocational Skills"
     },
     {
         "title": "Having a Bad Dream",
@@ -16608,7 +16685,8 @@ export const socialStories = [
             "A bad dream is not real. It is just a story my brain made up while I was resting.",
             "When I wake up, I am safe in my bed and in my room.",
             "I can hug my favorite stuffed animal, take slow deep breaths, or call for my parents if I need a hug."
-        ]
+        ],
+        "category": "Home Skills"
     },
     {
         "title": "Getting a Cut or Scrape",
@@ -16618,7 +16696,8 @@ export const socialStories = [
             "I will tell a grown-up right away so they can help me.",
             "The grown-up will clean the cut with water or a wipe, which might sting a little more, but keeps it healthy.",
             "Then they will put a cool band-aid over it to protect it while it heals. I am very brave!"
-        ]
+        ],
+        "category": "Home Skills"
     },
     {
         "title": "Washing My Hair",
@@ -16628,9 +16707,10 @@ export const socialStories = [
             "If I don't like water on my face, I can tilt my head all the way back like I am looking at the ceiling.",
             "I can close my eyes tight and hold a dry washcloth over my face to protect it.",
             "Once the bubbles are gone, my hair is clean, and the hard part is over!"
-        ]
+        ],
+        "category": "Home Skills"
     },
-{
+    {
         "title": "When the Power Goes Out",
         "pages": [
             "Sometimes the electricity stops working and the lights go out.",
@@ -16638,7 +16718,8 @@ export const socialStories = [
             "I must stay exactly where I am and wait for my parents to get a flashlight.",
             "The power will come back on soon. Until then, we can play a game in the dark.",
             "I am safe with my family even when the lights are off."
-        ]
+        ],
+        "category": "Home Skills"
     },
     {
         "title": "When Food Touches on My Plate",
@@ -16648,7 +16729,8 @@ export const socialStories = [
             "I do not need to cry or throw the food. I can use my words.",
             "I can calmly ask, 'Can you please separate my food?'",
             "I can also use my fork to carefully move the food apart myself."
-        ]
+        ],
+        "category": "Home Skills"
     },
     {
         "title": "Privacy and Getting Dressed",
@@ -16658,7 +16740,8 @@ export const socialStories = [
             "I should not take off my clothes in the living room, the backyard, or at school.",
             "If someone walks in while I am changing, I can say, 'Please close the door, I need privacy.'",
             "Keeping my body private keeps me safe and respects others."
-        ]
+        ],
+        "category": "School Skills"
     },
     {
         "title": "Playing Games Online",
@@ -16668,7 +16751,8 @@ export const socialStories = [
             "I do not have to listen to them or argue back.",
             "I can press the 'mute' button so I don't hear them, or I can leave the game.",
             "I should never tell people online my real name, where I live, or what school I go to."
-        ]
+        ],
+        "category": "School Skills"
     },
     {
         "title": "Understanding Jokes",
@@ -16678,7 +16762,8 @@ export const socialStories = [
             "If someone is laughing and smiling, they are probably just joking.",
             "If the joke hurts my feelings, I can say, 'I don't like that joke.'",
             "A good joke makes everyone smile, not just the person telling it."
-        ]
+        ],
+        "category": "Basic Living Skills"
     },
     {
         "title": "Hearing a Baby Cry",
@@ -16688,7 +16773,8 @@ export const socialStories = [
             "The noise might hurt my ears or make me feel stressed.",
             "I can put on my headphones, cover my ears, or move to a quieter room.",
             "I can remember that the baby is not trying to be bad; they just need help from a grown-up."
-        ]
+        ],
+        "category": "Home Skills"
     },
     {
         "title": "Going to the Hospital",
@@ -16698,7 +16784,8 @@ export const socialStories = [
             "There might be beeping machines and funny smells, but the doctors are doing their job.",
             "If I have to visit the hospital, I must use a quiet voice and walk slowly.",
             "The doctors are experts, and I can trust them to help me or my family get better."
-        ]
+        ],
+        "category": "Community Participation Skills"
     },
     {
         "title": "Wearing Winter Clothes",
@@ -16708,7 +16795,8 @@ export const socialStories = [
             "It might feel bulky and hard to move, which can be frustrating.",
             "I can take a deep breath and remember that the clothes are protecting my body like a warm hug.",
             "When I go back inside, I can take all the heavy layers off."
-        ]
+        ],
+        "category": "Basic Living Skills"
     },
     {
         "title": "When I Lose Something Important",
@@ -16719,7 +16807,8 @@ export const socialStories = [
             "I can take a deep breath and retrace my steps. Where did I have it last?",
             "I can ask my parents, 'Can you please help me look for my toy?'",
             "Most of the time, lost things are found when we look carefully."
-        ]
+        ],
+        "category": "Home Skills"
     },
     {
         "title": "Going on a Field Trip",
@@ -16729,7 +16818,8 @@ export const socialStories = [
             "The rules are very important on a field trip so everyone stays safe.",
             "I must stay with my assigned group or my buddy the entire time.",
             "If I follow the rules and listen to the chaperone, I will have a fantastic adventure!"
-        ]
+        ],
+        "category": "School Skills"
     },
     {
         "title": "Asking for Help in a Store",
@@ -16739,7 +16829,8 @@ export const socialStories = [
             "I can stand politely and wait until they are not busy.",
             "Then I can say, 'Excuse me, can you help us find this?'",
             "Store workers are happy to help customers find exactly what they need."
-        ]
+        ],
+        "category": "School Skills"
     },
     {
         "title": "When Someone Else is in Trouble",
@@ -16749,7 +16840,8 @@ export const socialStories = [
             "It is not my job to scold the other kid or laugh at them.",
             "I need to mind my own business and focus on my own work.",
             "The teacher will handle the problem, and I can continue making good choices."
-        ]
+        ],
+        "category": "School Skills"
     },
     {
         "title": "Having a Substitute Bus Driver",
@@ -16759,7 +16851,8 @@ export const socialStories = [
             "The substitute might look different or not know where my exact stop is at first.",
             "I can be brave and help the driver by sitting quietly in my seat.",
             "I can politely tell them, 'My stop is coming up next,' to be a helpful passenger."
-        ]
+        ],
+        "category": "School Skills"
     },
     {
         "title": "Seeing a Fire Alarm at Home",
@@ -16769,7 +16862,8 @@ export const socialStories = [
             "I must not hide under my bed or in my closet.",
             "I need to leave the house quickly and go to my family's safe meeting spot outside.",
             "My parents or the firefighters will make sure the house is safe before we go back inside."
-        ]
+        ],
+        "category": "Home Skills"
     },
     {
         "title": "When a Pet Dies",
@@ -16779,7 +16873,8 @@ export const socialStories = [
             "Dying means their body stops working and they are gone. This is very, very sad.",
             "It is okay to cry a lot and miss them. My family will miss them too.",
             "We can look at pictures of our pet and talk about the happy memories we shared."
-        ]
+        ],
+        "category": "Vocational Skills"
     },
     {
         "title": "Riding a Bicycle",
@@ -16789,7 +16884,8 @@ export const socialStories = [
             "I need to watch out for cars, people walking, and bumps in the road.",
             "If someone is walking in front of me, I can ring my bell or say 'Excuse me!'",
             "I always use my brakes to stop safely when I am done riding."
-        ]
+        ],
+        "category": "Basic Living Skills"
     },
     {
         "title": "Going to a Hotel",
@@ -16799,7 +16895,8 @@ export const socialStories = [
             "I get to sleep in a different bed and use a different bathroom.",
             "Because other people are sleeping in the rooms next to us, I must use a quiet voice.",
             "Hotels are fun, and my parents will make sure I am safe until we go back home."
-        ]
+        ],
+        "category": "Home Skills"
     },
     {
         "title": "Moving to a New House or School",
@@ -16809,7 +16906,8 @@ export const socialStories = [
             "I might feel worried, scared, or angry about leaving my old things behind.",
             "It is okay to feel nervous about big changes.",
             "It will take time to learn my new routine, but soon my new house will feel like home."
-        ]
+        ],
+        "category": "School Skills"
     },
     {
         "title": "Doing Chores at Home",
@@ -16819,7 +16917,8 @@ export const socialStories = [
             "My chore might be setting the table, feeding the dog, or taking out the trash.",
             "I need to do my chores without whining or complaining.",
             "Helping with chores makes me a responsible and important part of my family team!"
-        ]
+        ],
+        "category": "Home Skills"
     },
     {
         "title": "Being Proud of Myself",
@@ -16829,7 +16928,8 @@ export const socialStories = [
             "When I use my coping skills, share with a friend, or try something new, I am growing.",
             "I can look in the mirror and tell myself, 'I am doing a great job.'",
             "I should always be proud of myself, because I am wonderful just the way I am!"
-        ]
+        ],
+        "category": "Vocational Skills"
     }
 ];
 
