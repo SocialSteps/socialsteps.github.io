@@ -3,12 +3,23 @@ import cors from 'cors';
 import sqlite3 from 'sqlite3';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { createProxyMiddleware } from 'http-proxy-middleware';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
 app.use(cors());
+
+// Proxy for Nvidia API BEFORE body parser to handle SSE streams flawlessly
+app.use('/api/nvidia', createProxyMiddleware({
+  target: 'https://integrate.api.nvidia.com',
+  changeOrigin: true,
+  pathRewrite: {
+    '^/api/nvidia': '',
+  },
+}));
+
 app.use(express.json());
 
 // Set up SQLite Database

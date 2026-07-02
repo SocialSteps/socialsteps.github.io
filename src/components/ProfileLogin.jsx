@@ -40,6 +40,7 @@ export default function ProfileLogin({ onLogin }) {
 
   useEffect(() => {
     const migrateProfiles = async () => {
+      const API_BASE = import.meta.env.VITE_API_BASE_URL || '/api';
       const stored = localStorage.getItem('socialsteps_profiles');
       if (stored) {
         try {
@@ -47,13 +48,13 @@ export default function ProfileLogin({ onLogin }) {
           for (const key in profiles) {
             const p = profiles[key];
             const passwordKey = `${p.name.toLowerCase().trim()}-${p.animal}-${p.color}`;
-            await fetch('/api/profiles/register', {
+            await fetch(`${API_BASE}/profiles/register`, {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({ ...p, passwordKey })
             });
             if (p.notes) {
-              await fetch(`/api/profiles/${passwordKey}`, {
+              await fetch(`${API_BASE}/profiles/${passwordKey}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ notes: p.notes })
@@ -99,9 +100,10 @@ export default function ProfileLogin({ onLogin }) {
 
     const passwordKey = `${name.toLowerCase().trim()}-${selectedAnimal}-${selectedColor}`;
 
+    const API_BASE = import.meta.env.VITE_API_BASE_URL || '/api';
     try {
       if (isRegistering) {
-        const res = await fetch('/api/profiles/register', {
+        const res = await fetch(`${API_BASE}/profiles/register`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -119,7 +121,7 @@ export default function ProfileLogin({ onLogin }) {
         const newProfile = await res.json();
         onLogin(newProfile);
       } else {
-        const res = await fetch('/api/profiles/login', {
+        const res = await fetch(`${API_BASE}/profiles/login`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ passwordKey })

@@ -1,5 +1,5 @@
 export const NVIDIA_API_KEY = "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";
-export const NVIDIA_API_URL = "/api/nvidia/v1/chat/completions";
+export const NVIDIA_API_URL = `${import.meta.env.VITE_API_BASE_URL || '/api'}/nvidia/v1/chat/completions`;
 
 export async function generateCompletion(systemPrompt, userPrompt, model = "nvidia/llama-3.3-nemotron-super-49b-v1.5") {
   const response = await fetch(NVIDIA_API_URL, {

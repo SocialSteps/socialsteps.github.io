@@ -96,8 +96,9 @@ Output ONLY the updated paragraph of notes. No intro, no outro.`;
       const newNotes = await chatCompletion(summaryRequest);
       
       const passwordKey = `${profile.name.toLowerCase().trim()}-${profile.animal}-${profile.color}`;
+      const API_BASE = import.meta.env.VITE_API_BASE_URL || '/api';
       
-      const res = await fetch(`/api/profiles/${passwordKey}`, {
+      const res = await fetch(`${API_BASE}/profiles/${passwordKey}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ notes: newNotes })
