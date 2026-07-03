@@ -20,6 +20,15 @@ app.use('/api/nvidia', createProxyMiddleware({
   },
 }));
 
+// Proxy for Piper TTS API BEFORE body parser so POST body streams properly
+app.use('/api/tts', createProxyMiddleware({
+  target: 'http://localhost:5000',
+  changeOrigin: true,
+  pathRewrite: {
+    '^/api/tts': '',
+  },
+}));
+
 app.use(express.json());
 
 // Set up SQLite Database
