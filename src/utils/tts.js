@@ -1,4 +1,4 @@
-const API_BASE = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3001';
+const API_BASE = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3001/api';
 
 let currentAudio = null;
 
@@ -10,7 +10,7 @@ export async function playTTS(text) {
   }
 
   try {
-    const response = await fetch(`${API_BASE}/api/tts`, {
+    const response = await fetch(`${API_BASE}/tts`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
