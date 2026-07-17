@@ -1,12 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { faq } from '../utils/data';
-import { subscribeToSemanticManager, searchSemantic } from '../utils/semanticManager';
+import { subscribeToSemanticManager, searchSemantic, getSemanticStatus } from '../utils/semanticManager';
 
 export default function FAQ() {
+  const status = getSemanticStatus();
   const [searchTerm, setSearchTerm] = useState("");
   const [results, setResults] = useState(faq); // Default to showing all
-  const [isReady, setIsReady] = useState(false);
-  const [loadingMsg, setLoadingMsg] = useState("Initializing AI...");
+  const [isReady, setIsReady] = useState(status.isReady);
+  const [loadingMsg, setLoadingMsg] = useState(status.lastStatus?.status === 'ready' ? '' : 'Initializing AI...');
   const [isSearching, setIsSearching] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState("All");
   

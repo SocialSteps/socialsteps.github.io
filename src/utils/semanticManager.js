@@ -11,14 +11,34 @@ export function initSemanticManager() {
   
   worker = new SemanticWorker();
   
+  let cachedEmbeddings = null;
+  try {
+    const cached = localStorage.getItem('faqEmbeddings');
+    if (cached) cachedEmbeddings = JSON.parse(cached);
+  } catch (e) {
+    console.error("Failed to load cached embeddings", e);
+  }
+  
   worker.onmessage = (e) => {
     const data = e.data;
     if (data.status === 'ready') isReady = true;
+    if (data.status === 'embeddings_computed') {
+      try {
+        localStorage.setItem('faqEmbeddings', JSON.stringify(data.embeddings));
+      } catch (e) {
+        console.error("Failed to save embeddings to cache", e);
+      }
+      return; // don't send this to listeners
+    }
     if (data.status !== 'search_result') lastStatus = data;
     listeners.forEach(fn => fn(data));
   };
   
-  worker.postMessage({ type: 'init', data: { faq } });
+  worker.postMessage({ type: 'init', data: { faq, cachedEmbeddings } });
+}
+
+export function getSemanticStatus() {
+  return { isReady, lastStatus };
 }
 
 export function subscribeToSemanticManager(callback) {

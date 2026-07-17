@@ -34,24 +34,29 @@ self.addEventListener('message', async (e) => {
       await initExtractor();
       
       faqCorpus = data.faq; // [{id, question, answer, category}]
-      faqEmbeddings = [];
       
-      postMessage({ status: 'embedding_corpus', total: faqCorpus.length });
-      
-      for (let i = 0; i < faqCorpus.length; i++) {
-        const item = faqCorpus[i];
-        // Combine question and answer for a richer embedding
-        const text = `${item.question} ${item.answer}`;
-        const emb = await embedText(text);
-        faqEmbeddings.push(emb);
+      if (data.cachedEmbeddings && data.cachedEmbeddings.length === faqCorpus.length) {
+        faqEmbeddings = data.cachedEmbeddings;
+        postMessage({ status: 'ready' });
+      } else {
+        faqEmbeddings = [];
+        postMessage({ status: 'embedding_corpus', total: faqCorpus.length });
         
-        // Report progress every 10 items
-        if (i % 10 === 0) {
-          postMessage({ status: 'embedding_progress', current: i, total: faqCorpus.length });
+        for (let i = 0; i < faqCorpus.length; i++) {
+          const item = faqCorpus[i];
+          const text = `${item.question} ${item.answer}`;
+          const emb = await embedText(text);
+          faqEmbeddings.push(emb);
+          
+          if (i % 10 === 0) {
+            postMessage({ status: 'embedding_progress', current: i, total: faqCorpus.length });
+          }
         }
+        
+        // Send back to main thread to save in localStorage
+        postMessage({ status: 'embeddings_computed', embeddings: faqEmbeddings });
+        postMessage({ status: 'ready' });
       }
-      
-      postMessage({ status: 'ready' });
     }
     
     if (type === 'search') {
