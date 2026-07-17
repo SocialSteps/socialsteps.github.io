@@ -8,6 +8,9 @@ export default function FAQ() {
   const [isReady, setIsReady] = useState(false);
   const [loadingMsg, setLoadingMsg] = useState("Initializing AI...");
   const [isSearching, setIsSearching] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState("All");
+  
+  const categories = Array.from(new Set(faq.map(item => item.category)));
   
   const debounceRef = useRef(null);
 
@@ -104,8 +107,28 @@ export default function FAQ() {
         )}
       </div>
 
+      <div className="mobile-nav" style={{ display: 'flex', gap: '10px', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '30px' }}>
+        <button 
+          className={`btn ${selectedCategory === 'All' ? 'btn-primary' : 'btn-secondary'}`}
+          onClick={() => setSelectedCategory('All')}
+          style={{ fontSize: '1rem', borderRadius: '20px', padding: '8px 16px' }}
+        >
+          All
+        </button>
+        {categories.map(cat => (
+          <button 
+            key={cat} 
+            className={`btn ${selectedCategory === cat ? 'btn-primary' : 'btn-secondary'}`}
+            onClick={() => setSelectedCategory(cat)}
+            style={{ fontSize: '1rem', borderRadius: '20px', padding: '8px 16px' }}
+          >
+            {cat}
+          </button>
+        ))}
+      </div>
+
       <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-        {results.map((item) => (
+        {(selectedCategory === "All" ? results : results.filter(item => item.category === selectedCategory)).map((item) => (
           <div key={item.id} className="glass-panel hover-effect" style={{ padding: '24px', background: 'rgba(255,255,255,0.6)' }}>
             <h4 style={{ color: 'var(--primary)', marginBottom: '10px', fontSize: '1.3rem' }}>{item.question}</h4>
             <p style={{ color: 'var(--text)', lineHeight: '1.6', fontSize: '1.1rem' }}>{item.answer}</p>
@@ -114,7 +137,7 @@ export default function FAQ() {
             </span>
           </div>
         ))}
-        {results.length === 0 && <p>No questions found.</p>}
+        {(selectedCategory === "All" ? results : results.filter(item => item.category === selectedCategory)).length === 0 && <p>No questions found.</p>}
       </div>
     </div>
   );
