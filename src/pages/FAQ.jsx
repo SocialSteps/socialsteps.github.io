@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { faq } from '../utils/data';
-import SemanticWorker from '../workers/semanticWorker?worker';
+import { subscribeToSemanticManager, searchSemantic } from '../utils/semanticManager';
 
 export default function FAQ() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -9,15 +9,11 @@ export default function FAQ() {
   const [loadingMsg, setLoadingMsg] = useState("Initializing AI...");
   const [isSearching, setIsSearching] = useState(false);
   
-  const workerRef = useRef(null);
   const debounceRef = useRef(null);
 
   useEffect(() => {
-    // Initialize Web Worker
-    workerRef.current = new SemanticWorker();
-
-    workerRef.current.onmessage = (e) => {
-      const { status, results: searchResults, progress, current, total } = e.data;
+    const unsubscribe = subscribeToSemanticManager((data) => {
+      const { status, results: searchResults, progress, current, total } = data;
       
       switch (status) {
         case 'initializing':
@@ -43,20 +39,15 @@ export default function FAQ() {
           setIsSearching(false);
           break;
         case 'error':
-          console.error("AI Error:", e.data.error);
+          console.error("AI Error:", data.error);
           setIsSearching(false);
           break;
         default:
           break;
       }
-    };
+    });
 
-    // Send init message
-    workerRef.current.postMessage({ type: 'init', data: { faq } });
-
-    return () => {
-      if (workerRef.current) workerRef.current.terminate();
-    };
+    return unsubscribe;
   }, []);
 
   const handleSearchChange = (e) => {
@@ -84,7 +75,7 @@ export default function FAQ() {
 
     setIsSearching(true);
     debounceRef.current = setTimeout(() => {
-      workerRef.current.postMessage({ type: 'search', data: { query: val }, id: Date.now() });
+      searchSemantic(val);
     }, 400); // 400ms debounce
   };
 
