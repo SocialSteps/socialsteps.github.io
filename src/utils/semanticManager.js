@@ -33,8 +33,7 @@ export function initSemanticManager() {
     if (data.status === 'ready') isReady = true;
     if (data.status === 'embeddings_computed') {
       try {
-        const serializableEmbeddings = data.embeddings.map(emb => Array.from(emb));
-        localStorage.setItem('faqEmbeddings', JSON.stringify(serializableEmbeddings));
+        localStorage.setItem('faqEmbeddings', JSON.stringify(data.embeddings));
       } catch (e) {
         console.error("Failed to save embeddings to cache", e);
       }

@@ -22,7 +22,7 @@ async function initExtractor() {
 async function embedText(text) {
   const ext = await initExtractor();
   const output = await ext(text, { pooling: 'mean', normalize: true });
-  return output.data;
+  return output.tolist()[0];
 }
 
 self.addEventListener('message', async (e) => {
