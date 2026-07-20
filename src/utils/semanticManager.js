@@ -14,7 +14,16 @@ export function initSemanticManager() {
   let cachedEmbeddings = null;
   try {
     const cached = localStorage.getItem('faqEmbeddings');
-    if (cached) cachedEmbeddings = JSON.parse(cached);
+    if (cached) {
+      const parsed = JSON.parse(cached);
+      // Ensure the cached embeddings are actually arrays and not serialized Float32Array objects
+      if (Array.isArray(parsed) && parsed.length > 0 && Array.isArray(parsed[0])) {
+        cachedEmbeddings = parsed;
+      } else {
+        console.warn("Cached embeddings are invalid. Discarding cache.");
+        localStorage.removeItem('faqEmbeddings');
+      }
+    }
   } catch (e) {
     console.error("Failed to load cached embeddings", e);
   }
@@ -24,7 +33,8 @@ export function initSemanticManager() {
     if (data.status === 'ready') isReady = true;
     if (data.status === 'embeddings_computed') {
       try {
-        localStorage.setItem('faqEmbeddings', JSON.stringify(data.embeddings));
+        const serializableEmbeddings = data.embeddings.map(emb => Array.from(emb));
+        localStorage.setItem('faqEmbeddings', JSON.stringify(serializableEmbeddings));
       } catch (e) {
         console.error("Failed to save embeddings to cache", e);
       }
