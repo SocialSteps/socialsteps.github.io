@@ -9,12 +9,15 @@ export default function OpenEndedQuiz({ profile }) {
   const [quizQuestions, setQuizQuestions] = useState([]);
   const [currentIdx, setCurrentIdx] = useState(0);
   const [isFinished, setIsFinished] = useState(false);
-  const [score, setScore] = useState(0);
   const [answer, setAnswer] = useState("");
   const [feedback, setFeedback] = useState("");
   const [isEvaluating, setIsEvaluating] = useState(false);
   const [timeLeft, setTimeLeft] = useState(60);
   const [timerActive, setTimerActive] = useState(false);
+  
+  const [history, setHistory] = useState([]);
+  const [finalSummary, setFinalSummary] = useState("");
+  const [isGeneratingSummary, setIsGeneratingSummary] = useState(false);
   
   useEffect(() => {
     startQuiz();
@@ -25,7 +28,9 @@ export default function OpenEndedQuiz({ profile }) {
     setQuizQuestions(shuffled.slice(0, 5));
     setCurrentIdx(0);
     setIsFinished(false);
-    setScore(0);
+    setHistory([]);
+    setFinalSummary("");
+    setIsGeneratingSummary(false);
     resetQuestionState();
   };
 
@@ -37,11 +42,48 @@ export default function OpenEndedQuiz({ profile }) {
   };
 
   const nextQuestion = () => {
+    const newHistory = [...history, { question, answer, feedback }];
+    setHistory(newHistory);
+    
     if (currentIdx + 1 < quizQuestions.length) {
       setCurrentIdx(i => i + 1);
       resetQuestionState();
     } else {
       setIsFinished(true);
+      generateFinalSummary(newHistory);
+    }
+  };
+
+  const generateFinalSummary = async (quizHistory) => {
+    setIsGeneratingSummary(true);
+    
+    const systemPrompt = `You are an encouraging and supportive social skills coach giving final feedback to ${profile?.name || 'a user'} on their performance in a 5-question open-ended quiz.
+Review the history of the questions they were asked, their answers, and the feedback they received.
+Provide a comprehensive, highly encouraging 2-3 paragraph summary of how they did overall. Do not give a grade or score. Focus on their growth, highlight the common positive themes in their answers, and gently point out the main areas they can continue to practice. Speak directly to them using 'You'.`;
+
+    let userPrompt = "Here is the quiz history:\n\n";
+    quizHistory.forEach((h, i) => {
+      userPrompt += `Question ${i + 1}: ${h.question}\nUser's Answer: ${h.answer}\nFeedback Received: ${h.feedback}\n\n`;
+    });
+
+    try {
+      let accumulatedSummary = "";
+      await streamChatCompletion(
+        [
+          { role: 'system', content: systemPrompt },
+          { role: 'user', content: userPrompt }
+        ],
+        (chunk) => {
+          accumulatedSummary += chunk;
+          setFinalSummary(accumulatedSummary);
+        },
+        () => {
+          setIsGeneratingSummary(false);
+        }
+      );
+    } catch (e) {
+      setFinalSummary("Failed to generate summary. Please try again later.");
+      setIsGeneratingSummary(false);
     }
   };
 
@@ -65,24 +107,21 @@ export default function OpenEndedQuiz({ profile }) {
   if (quizQuestions.length === 0) return <div>Loading...</div>;
 
   if (isFinished) {
-    const pct = (score / 5.0) * 100.0;
-    let guidance = "";
-    if (pct >= 80) { // 4 or 5 correct
-        guidance = "🌟 Outstanding! Expressing your own thoughts on the spot is tough, but you handled these social situations beautifully. Try putting these skills to use in real-world conversations!";
-    } else if (pct >= 60) { // 3 correct
-        guidance = "👍 Great job! You have a solid grasp on how to communicate in these situations. If you want to refine your answers or understand why you missed a point, be sure to read the feedback closely.";
-    } else if (pct >= 40) { // 2 correct
-        guidance = "🙂 Good effort! Finding the right words with a ticking timer can be stressful. Try reviewing the 'Social Skills' section or practicing with the 'Basic Quiz' to build up your confidence.";
-    } else { // 0 or 1 correct
-        guidance = "⚠️ Don't get discouraged! Social interactions are complicated, and answering on the spot takes practice. I recommend checking out the 'Commonly Asked Social Skills Questions' or chatting with 'Someone To Talk To' for some pressure-free practice.";
-    }
-
     return (
       <div className="glass-panel animate-fade-in" style={{ padding: '60px', minHeight: '100%', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
         <h2 style={{ fontSize: '3.5rem', marginBottom: '20px', color: 'var(--primary)' }}>Quiz Complete! 🎉</h2>
-        <h3 style={{ fontSize: '2.5rem', marginBottom: '20px', color: 'var(--text-main)' }}>Your score: {score} / 5</h3>
-        <p style={{ fontSize: '1.5rem', marginBottom: '50px', color: 'var(--text-main)', maxWidth: '800px', lineHeight: '1.6' }}>{guidance}</p>
-        <button className="btn btn-primary" onClick={startQuiz} style={{ fontSize: '1.2rem', padding: '15px 40px' }}>Restart Quiz 🔄</button>
+        
+        {isGeneratingSummary && !finalSummary && (
+          <div style={{ fontSize: '1.5rem', color: 'var(--text-main)', marginBottom: '50px' }}>Evaluating your overall performance...</div>
+        )}
+        
+        {finalSummary && (
+          <div className="chat-markdown" style={{ fontSize: '1.2rem', marginBottom: '50px', color: 'var(--text-main)', maxWidth: '800px', lineHeight: '1.6', textAlign: 'left', background: 'rgba(255,255,255,0.8)', padding: '30px', borderRadius: '20px' }}>
+            <ReactMarkdown>{finalSummary}</ReactMarkdown>
+          </div>
+        )}
+        
+        <button className="btn btn-primary" onClick={startQuiz} style={{ fontSize: '1.2rem', padding: '15px 40px' }} disabled={isGeneratingSummary}>Restart Quiz 🔄</button>
       </div>
     );
   }
@@ -99,11 +138,15 @@ export default function OpenEndedQuiz({ profile }) {
     setTimerActive(false);
     setFeedback("");
     
-    const systemPrompt = `Evaluate the user's answer for correctness AND politeness/social appropriateness. You are currently giving feedback to ${profile?.name || 'a user'}, who is ${profile?.age || 'unknown'} years old. They like to ${profile?.likes || 'nothing specified'}. Their strengths include ${profile?.strengths || 'nothing specified'}. They want to improve on ${profile?.improve || 'nothing specified'}.
+    const systemPrompt = `Evaluate the user's answer for politeness and social appropriateness. You are currently giving feedback to ${profile?.name || 'a user'}, who is ${profile?.age || 'unknown'} years old. They like to ${profile?.likes || 'nothing specified'}. Their strengths include ${profile?.strengths || 'nothing specified'}. They want to improve on ${profile?.improve || 'nothing specified'}.
 
 Please acknowledge and incorporate this information about them into your responses to make them more personalized and relevant.
 
-Your response MUST ALWAYS start with either the exact word 'Correct' or the exact word 'Incorrect'. If the user's answer is rude, uses profanity, demands something, or is impolite in any way, start your response with 'Incorrect'. Only start with 'Correct' if the answer is both factually correct AND polite. After stating Correct/Incorrect, explain why the answer is correct or incorrect. Be supportive, point out strengths, and gently suggest improvements. IMPORTANT: Always provide 1 or 2 specific, quoted examples of what a perfect, polite response would sound like for this scenario. Introduce them clearly (e.g., 'Here is a great way to respond:' or 'Another polite way to say this would be:'). This gives the user a concrete script to learn from. Do not ask follow-up questions, the user cannot interact with you. YOU MUST ALWAYS address the user as 'You' and use a friendly, encouraging tone. Also give a letter grade for the answer (A, B, C, D, or F). If the answer is correct and polite, give an A. If it is incorrect but polite, give a B or C depending on how close it was to being correct. If it is rude or impolite, give a D or F depending on how rude it was. If the answer was left blank, then mark the answer as 'Incorrect', but DO NOT suggest that the user try again or retry the question. There is a strict 60-second timer for each question to simulate real-world time pressure in conversations. Spelling or grammatical mistakes may occur because the timer can end before the user fully completes their response. Do not penalize the user for any kind of spelling or grammatical errors caused by this timer constraint. The user may choose to speak their answer out loud, which may lead to repetition or filler words in their response. Do not penalize the user for any repetition or filler words caused by this.`;
+DO NOT give a grade, score, or use the words 'Correct' or 'Incorrect'. Start by pointing out what worked well in their answer, and then gently suggest what they could improve. Be supportive, encouraging, and kind. YOU MUST ALWAYS address the user as 'You'.
+
+IMPORTANT: Always provide 1 or 2 specific, quoted examples of what a perfect, polite response would sound like for this scenario. Introduce them clearly (e.g., 'Here is a great way to respond:' or 'Another polite way to say this would be:'). This gives the user a concrete script to learn from. Do not ask follow-up questions, the user cannot interact with you. 
+
+There is a strict 60-second timer for each question to simulate real-world time pressure in conversations. Do not penalize the user for any kind of spelling or grammatical errors, repetition, or filler words caused by this timer constraint or from speaking their answer out loud.`;
 
     const userPrompt = `Question: ${question}\nMy Answer: ${answer}`;
 
@@ -120,10 +163,6 @@ Your response MUST ALWAYS start with either the exact word 'Correct' or the exac
         },
         () => {
           setIsEvaluating(false);
-          const cleanFeedback = accumulatedFeedback.replace(/[*#_]/g, '').trim();
-          if (cleanFeedback.startsWith("Correct") || cleanFeedback.startsWith("Grade: A") || cleanFeedback.startsWith("Grade A")) {
-            setScore(prev => prev + 1);
-          }
         }
       );
     } catch (e) {
