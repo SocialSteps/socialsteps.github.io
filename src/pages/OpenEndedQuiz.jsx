@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ReactMarkdown from 'react-markdown';
 import { streamChatCompletion } from '../utils/api';
 import { openEndedQuiz } from '../utils/data';
-import { Play, RefreshCw, Mic, Volume2, Timer } from 'lucide-react';
+import { Play, RefreshCw, Mic, Volume2, Timer, Loader2 } from 'lucide-react';
 import { playTTS } from '../utils/tts';
 
 export default function OpenEndedQuiz({ profile }) {
@@ -112,7 +112,10 @@ Provide a comprehensive, highly encouraging 2-3 paragraph summary of how they di
         <h2 style={{ fontSize: '3.5rem', marginBottom: '20px', color: 'var(--primary)' }}>Quiz Complete! 🎉</h2>
         
         {isGeneratingSummary && !finalSummary && (
-          <div style={{ fontSize: '1.5rem', color: 'var(--text-main)', marginBottom: '50px' }}>Evaluating your overall performance...</div>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '20px', marginBottom: '50px' }}>
+            <Loader2 className="animate-spin" size={48} color="var(--primary)" />
+            <div style={{ fontSize: '1.5rem', color: 'var(--text-main)' }}>Evaluating your overall performance...</div>
+          </div>
         )}
         
         {finalSummary && (
@@ -121,7 +124,9 @@ Provide a comprehensive, highly encouraging 2-3 paragraph summary of how they di
           </div>
         )}
         
-        <button className="btn btn-primary" onClick={startQuiz} style={{ fontSize: '1.2rem', padding: '15px 40px' }} disabled={isGeneratingSummary}>Restart Quiz 🔄</button>
+        {!isGeneratingSummary && (
+          <button className="btn btn-primary" onClick={startQuiz} style={{ fontSize: '1.2rem', padding: '15px 40px' }}>Restart Quiz 🔄</button>
+        )}
       </div>
     );
   }
