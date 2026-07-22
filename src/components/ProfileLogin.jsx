@@ -80,8 +80,32 @@ export default function ProfileLogin({ onLogin }) {
   }, []);
 
   const getFilteredOptions = (options, value) => {
-    if (!value) return options;
-    return options.filter(opt => opt.toLowerCase().includes(value.toLowerCase()));
+    const parts = value.split(',').map(s => s.trim()).filter(Boolean);
+    const currentTyping = value.split(',').pop().trim();
+    
+    return options.filter(opt => {
+      if (parts.includes(opt) && opt !== currentTyping) return false;
+      if (currentTyping) return opt.toLowerCase().includes(currentTyping.toLowerCase());
+      return true;
+    });
+  };
+
+  const handleAppend = (setter, currentValue, option) => {
+    const parts = currentValue.split(',');
+    parts.pop(); // remove what they are currently typing at the end
+    const newParts = parts.map(s => s.trim()).filter(Boolean);
+    if (!newParts.includes(option)) {
+      newParts.push(option);
+    }
+    setter(newParts.join(', ') + ', ');
+    
+    // Keep focus on the input if possible
+    setTimeout(() => {
+      const activeEl = document.activeElement;
+      if (activeEl && activeEl.tagName === 'INPUT') {
+        activeEl.focus();
+      }
+    }, 0);
   };
 
   const handleSubmit = async (e) => {
@@ -216,7 +240,7 @@ export default function ProfileLogin({ onLogin }) {
               {activeInput === 'likes' && (
                 <div className="suggestions-container animate-fade-in">
                   {getFilteredOptions(commonLikes, likes).map((item, idx) => (
-                    <button key={idx} type="button" className="suggestion-pill" onClick={() => setLikes(item)}>{item}</button>
+                    <button key={idx} type="button" className="suggestion-pill" onMouseDown={(e) => { e.preventDefault(); handleAppend(setLikes, likes, item); }}>{item}</button>
                   ))}
                 </div>
               )}
@@ -235,7 +259,7 @@ export default function ProfileLogin({ onLogin }) {
               {activeInput === 'strengths' && (
                 <div className="suggestions-container animate-fade-in">
                   {getFilteredOptions(commonStrengths, strengths).map((item, idx) => (
-                    <button key={idx} type="button" className="suggestion-pill" onClick={() => setStrengths(item)}>{item}</button>
+                    <button key={idx} type="button" className="suggestion-pill" onMouseDown={(e) => { e.preventDefault(); handleAppend(setStrengths, strengths, item); }}>{item}</button>
                   ))}
                 </div>
               )}
@@ -254,7 +278,7 @@ export default function ProfileLogin({ onLogin }) {
               {activeInput === 'weaknesses' && (
                 <div className="suggestions-container animate-fade-in">
                   {getFilteredOptions(commonWeaknesses, weaknesses).map((item, idx) => (
-                    <button key={idx} type="button" className="suggestion-pill" onClick={() => setWeaknesses(item)}>{item}</button>
+                    <button key={idx} type="button" className="suggestion-pill" onMouseDown={(e) => { e.preventDefault(); handleAppend(setWeaknesses, weaknesses, item); }}>{item}</button>
                   ))}
                 </div>
               )}
