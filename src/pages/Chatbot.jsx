@@ -19,6 +19,14 @@ export default function Chatbot({ profile, setProfile }) {
   const [isLoading, setIsLoading] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const messagesEndRef = useRef(null);
+  const hasSavedRef = useRef(false);
+  const messagesRef = useRef(messages);
+  const profileRef = useRef(profile);
+
+  useEffect(() => {
+    messagesRef.current = messages;
+    profileRef.current = profile;
+  }, [messages, profile]);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -30,6 +38,8 @@ export default function Chatbot({ profile, setProfile }) {
 
   const handleSend = async () => {
     if (!input.trim() || isLoading || isSaving) return;
+
+    hasSavedRef.current = false;
 
     const userMessage = { role: 'user', content: input };
     const newMessages = [...messages, userMessage];
@@ -55,16 +65,8 @@ export default function Chatbot({ profile, setProfile }) {
     }
   };
 
-  const handleSaveAndEnd = async () => {
-    if (messages.length <= 2) {
-      navigate('/');
-      return;
-    }
-
-    setIsSaving(true);
-    setMessages(prev => [...prev, { role: 'assistant', content: 'Saving your session notes... Please wait a moment.' }]);
-
-    const currentName = profile?.name || 'the person';
+  const performSave = async (currentMessages, currentProfile) => {
+    const currentName = currentProfile?.name || 'the person';
     const memorySystemPrompt = `You are an expert Memory Manager and Social Coach Assistant.
 Your goal is to update the saved notes based on the conversation history provided.
 
@@ -81,40 +83,76 @@ Example Output:
 
 Output ONLY the updated paragraph of notes. No intro, no outro.`;
 
-    const chatHistoryStr = messages.filter(m => m.role !== 'system').map(m => `Role: ${m.role}\n${m.content}\n\n`).join('');
+    const chatHistoryStr = currentMessages.filter(m => m.role !== 'system').map(m => `Role: ${m.role}\n${m.content}\n\n`).join('');
     
     const summaryRequest = [
       { role: 'system', content: memorySystemPrompt },
-      ...messages.filter(m => m.role !== 'system' && m.content !== 'Saving your session notes... Please wait a moment.'),
+      ...currentMessages.filter(m => m.role !== 'system' && m.content !== 'Saving your session notes... Please wait a moment.'),
       { 
         role: 'user', 
-        content: `Current Notes: ${profile?.notes || ''}\n\nCurrent Conversation:\n${chatHistoryStr}\nBased on the conversation above, update these notes to include specific names and plans. Remember to use the name ${currentName} instead of 'User':`
+        content: `Current Notes: ${currentProfile?.notes || ''}\n\nCurrent Conversation:\n${chatHistoryStr}\nBased on the conversation above, update these notes to include specific names and plans. Remember to use the name ${currentName} instead of 'User':`
       }
     ];
 
+    const newNotes = await chatCompletion(summaryRequest);
+    
+    const passwordKey = `${currentProfile.name.toLowerCase().trim()}-${currentProfile.animal}-${currentProfile.color}`;
+    const API_BASE = import.meta.env.VITE_API_BASE_URL || '/api';
+    
+    const res = await fetch(`${API_BASE}/profiles/${passwordKey}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ notes: newNotes })
+    });
+    
+    if (res.ok) {
+      setProfile({ ...currentProfile, notes: newNotes });
+    }
+  };
+
+  const handleSaveAndEnd = async () => {
+    if (messages.length <= 2) {
+      navigate('/');
+      return;
+    }
+
+    setIsSaving(true);
+    setMessages(prev => [...prev, { role: 'assistant', content: 'Saving your session notes... Please wait a moment.' }]);
+    hasSavedRef.current = true;
+
     try {
-      const newNotes = await chatCompletion(summaryRequest);
-      
-      const passwordKey = `${profile.name.toLowerCase().trim()}-${profile.animal}-${profile.color}`;
-      const API_BASE = import.meta.env.VITE_API_BASE_URL || '/api';
-      
-      const res = await fetch(`${API_BASE}/profiles/${passwordKey}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ notes: newNotes })
-      });
-      
-      if (res.ok) {
-        setProfile({ ...profile, notes: newNotes });
-      }
-      
+      await performSave(messages, profile);
       navigate('/');
     } catch (e) {
       console.error(e);
       setMessages(prev => [...prev, { role: 'assistant', content: 'There was an error saving your notes. You can still leave, or try again.' }]);
       setIsSaving(false);
+      hasSavedRef.current = false;
     }
   };
+
+  const triggerBackgroundSave = () => {
+    if (hasSavedRef.current || messagesRef.current.length <= 2) return;
+    hasSavedRef.current = true;
+    performSave(messagesRef.current, profileRef.current).catch((e) => {
+      console.error("Background auto-save failed", e);
+      hasSavedRef.current = false;
+    });
+  };
+
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === 'hidden') {
+        triggerBackgroundSave();
+      }
+    };
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+    
+    return () => {
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+      triggerBackgroundSave();
+    };
+  }, []);
 
   // Mock function for WASM Whisper
   const handleRecord = () => {
