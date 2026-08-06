@@ -84,7 +84,7 @@ export default function FAQ() {
   };
 
   return (
-    <div className="glass-panel animate-fade-in" style={{ padding: '40px', minHeight: '100%' }}>
+    <div className="glass-panel animate-fade-in" style={{ padding: '40px', minHeight: '100%', height: 'max-content' }}>
       <h2 style={{ marginBottom: '20px' }}>❓ Commonly Asked Questions</h2>
       
       <div style={{ position: 'relative', marginBottom: '30px' }}>
@@ -132,7 +132,7 @@ export default function FAQ() {
         {(selectedCategory === "All" ? results : results.filter(item => item.category === selectedCategory)).map((item) => (
           <div key={item.id} className="glass-panel hover-effect" style={{ padding: '24px', background: 'rgba(255,255,255,0.6)' }}>
             <h4 style={{ color: 'var(--primary)', marginBottom: '10px', fontSize: '1.3rem' }}>{item.question}</h4>
-            <p style={{ color: 'var(--text)', lineHeight: '1.6', fontSize: '1.1rem' }}>{item.answer}</p>
+            <p style={{ color: 'var(--text-main)', lineHeight: '1.6', fontSize: '1.1rem' }}>{item.answer}</p>
             <span style={{ display: 'inline-block', marginTop: '15px', fontSize: '0.85rem', padding: '6px 12px', background: 'var(--secondary)', color: 'white', borderRadius: '20px', fontWeight: 'bold' }}>
               {item.category}
             </span>
