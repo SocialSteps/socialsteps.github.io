@@ -26,7 +26,7 @@ export default function Stories() {
 
   if (selectedStory) {
     return (
-      <div className="glass-panel animate-fade-in" style={{ padding: '40px', minHeight: '100%', display: 'flex', flexDirection: 'column' }}>
+      <div className="glass-panel animate-fade-in" style={{ padding: '40px', minHeight: '100%', height: 'max-content', display: 'flex', flexDirection: 'column' }}>
         <button className="btn btn-secondary" onClick={() => setSelectedStory(null)} style={{ alignSelf: 'flex-start', marginBottom: '20px' }}>
           ← Back to Stories
         </button>
@@ -64,7 +64,7 @@ export default function Stories() {
   const filteredStories = socialStories.filter(s => s.category === selectedCategory);
 
   return (
-    <div className="glass-panel animate-fade-in" style={{ padding: '40px', minHeight: '100%' }}>
+    <div className="glass-panel animate-fade-in" style={{ padding: '40px', minHeight: '100%', height: 'max-content' }}>
       <h2 style={{ marginBottom: '20px', textAlign: 'center', fontSize: '2.5rem' }}>📚 Social Stories</h2>
       
       <div className="mobile-nav" style={{ display: 'flex', gap: '10px', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '40px' }}>

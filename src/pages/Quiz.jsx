@@ -109,7 +109,7 @@ Keep your explanation simple, clear, and encouraging. Use short paragraphs and p
     }
 
     return (
-      <div className="glass-panel animate-fade-in" style={{ padding: '60px', minHeight: '100%', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+      <div className="glass-panel animate-fade-in" style={{ padding: '60px', minHeight: '100%', height: 'max-content', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
         <h2 style={{ fontSize: '3.5rem', marginBottom: '20px', color: 'var(--primary)' }}>Quiz Complete! 🎉</h2>
         <h3 style={{ fontSize: '2.5rem', marginBottom: '20px', color: 'var(--text-main)' }}>You scored {score} out of {quizQuestions.length}</h3>
         <p style={{ fontSize: '1.5rem', marginBottom: '50px', color: 'var(--text-main)', maxWidth: '800px', lineHeight: '1.6' }}>{guidance}</p>
@@ -119,7 +119,7 @@ Keep your explanation simple, clear, and encouraging. Use short paragraphs and p
   }
 
   return (
-    <div className="glass-panel animate-fade-in" style={{ padding: '40px', minHeight: '100%', display: 'flex', flexDirection: 'column' }}>
+    <div className="glass-panel animate-fade-in" style={{ padding: '40px', minHeight: '100%', height: 'max-content', display: 'flex', flexDirection: 'column' }}>
       <h2 style={{ marginBottom: '30px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <span style={{ fontSize: '2rem' }}>{title}</span>
         <span style={{ fontSize: '1.2rem', color: 'var(--text-muted)', background: 'rgba(255,255,255,0.5)', padding: '10px 20px', borderRadius: '20px' }}>Question {currentIdx + 1} of {quizQuestions.length}</span>

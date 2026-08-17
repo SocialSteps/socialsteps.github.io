@@ -7,7 +7,7 @@ export default function Skills() {
   const filteredSkills = socialSkills.filter(s => s.skill.toLowerCase().includes(searchTerm.toLowerCase()));
 
   return (
-    <div className="glass-panel animate-fade-in" style={{ padding: '40px', minHeight: '100%' }}>
+    <div className="glass-panel animate-fade-in" style={{ padding: '40px', minHeight: '100%', height: 'max-content' }}>
       <h2 style={{ marginBottom: '20px' }}>🌟 Social Skills</h2>
       <input 
         type="text" 

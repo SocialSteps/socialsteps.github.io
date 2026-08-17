@@ -108,7 +108,7 @@ Provide a comprehensive, highly encouraging 2-3 paragraph summary of how they di
 
   if (isFinished) {
     return (
-      <div className="glass-panel animate-fade-in" style={{ padding: '60px', minHeight: '100%', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+      <div className="glass-panel animate-fade-in" style={{ padding: '60px', minHeight: '100%', height: 'max-content', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
         <h2 style={{ fontSize: '3.5rem', marginBottom: '20px', color: 'var(--primary)' }}>Quiz Complete! 🎉</h2>
         
         {isGeneratingSummary && !finalSummary && (
@@ -177,7 +177,7 @@ There is a strict 60-second timer for each question to simulate real-world time 
   };
 
   return (
-    <div className="glass-panel animate-fade-in" style={{ padding: '40px', height: '100%', display: 'flex', flexDirection: 'column' }}>
+    <div className="glass-panel animate-fade-in" style={{ padding: '40px', minHeight: '100%', height: 'max-content', display: 'flex', flexDirection: 'column' }}>
       <h2 style={{ marginBottom: '30px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <span style={{ fontSize: '2rem' }}>🗣️ Open-Ended Quiz</span>
         <span style={{ fontSize: '1.2rem', color: 'var(--text-muted)', background: 'rgba(255,255,255,0.5)', padding: '10px 20px', borderRadius: '20px' }}>

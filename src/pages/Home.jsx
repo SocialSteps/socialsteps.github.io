@@ -6,7 +6,7 @@ export default function Home({ profile }) {
   const navigate = useNavigate();
 
   return (
-    <div className="glass-panel animate-fade-in" style={{ padding: '40px', display: 'flex', flexDirection: 'column', gap: '30px' }}>
+    <div className="glass-panel animate-fade-in" style={{ padding: '40px', display: 'flex', flexDirection: 'column', gap: '30px', minHeight: '100%', height: 'max-content' }}>
       <div>
         <h1>Welcome to SocialSteps, {profile?.name || 'Friend'}! 🌟</h1>
         <p style={{ fontSize: '1.2rem', marginTop: '10px' }}>

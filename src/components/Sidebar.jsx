@@ -34,7 +34,7 @@ export default function Sidebar({ profile, onSignOut }) {
         <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>Current Profile</p>
       </div>
 
-      <nav className="mobile-nav" style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '8px' }}>
+      <nav className="mobile-nav" style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '8px', overflowY: 'auto', paddingRight: '5px' }}>
         {navItems.map((item) => (
           <NavLink
             key={item.to}
