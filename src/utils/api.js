@@ -128,3 +128,45 @@ export async function streamChatCompletion(messages, onChunk, onDone, model = "n
   }
 }
 
+export const GEMINI_API_KEY = import.meta.env.VITE_GEMINI_API_KEY || "";
+
+export async function transcribeAudio(base64Audio, mimeType) {
+  if (!GEMINI_API_KEY) {
+    throw new Error("Gemini API Key is missing. Please add VITE_GEMINI_API_KEY to your .env file.");
+  }
+  
+  // Clean base64 string if it contains the data URI prefix
+  const base64Data = base64Audio.includes(',') ? base64Audio.split(',')[1] : base64Audio;
+  
+  const GEMINI_API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.7-flash:generateContent?key=${GEMINI_API_KEY}`;
+
+  const response = await fetch(GEMINI_API_URL, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      contents: [{
+        parts: [
+          { text: "Transcribe the following audio accurately exactly as spoken. Only output the transcription, do not add any conversational filler, markdown formatting, or introductory text." },
+          {
+            inlineData: {
+              mimeType: mimeType,
+              data: base64Data
+            }
+          }
+        ]
+      }]
+    })
+  });
+  
+  if (!response.ok) {
+    const errorText = await response.text();
+    console.error("Transcription API Error:", errorText);
+    throw new Error(`Failed to transcribe audio. Status: ${response.status}`);
+  }
+  
+  const data = await response.json();
+  if (data.candidates && data.candidates.length > 0 && data.candidates[0].content.parts.length > 0) {
+    return data.candidates[0].content.parts[0].text.trim();
+  }
+  return "";
+}

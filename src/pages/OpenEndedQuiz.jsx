@@ -4,6 +4,7 @@ import { streamChatCompletion } from '../utils/api';
 import { openEndedQuiz } from '../utils/data';
 import { Play, RefreshCw, Mic, Volume2, Timer, Loader2 } from 'lucide-react';
 import { playTTS } from '../utils/tts';
+import useAudioRecorder from '../hooks/useAudioRecorder';
 
 export default function OpenEndedQuiz({ profile }) {
   const [quizQuestions, setQuizQuestions] = useState([]);
@@ -18,6 +19,13 @@ export default function OpenEndedQuiz({ profile }) {
   const [history, setHistory] = useState([]);
   const [finalSummary, setFinalSummary] = useState("");
   const [isGeneratingSummary, setIsGeneratingSummary] = useState(false);
+
+  const { isRecording, isTranscribing, toggleRecording } = useAudioRecorder({
+    onSuccess: (text) => {
+      handleSubmit(text);
+    },
+    onError: (err) => alert("Transcription Error: " + err)
+  });
   
   useEffect(() => {
     startQuiz();
@@ -100,9 +108,7 @@ Provide a comprehensive, highly encouraging 2-3 paragraph summary of how they di
     return () => clearInterval(interval);
   }, [timerActive, timeLeft, isEvaluating, feedback]);
 
-  const handleRecord = () => {
-    alert("Whisper.cpp WASM STT will start listening here! You can speak your answer.");
-  };
+
 
   if (quizQuestions.length === 0) return <div>Loading...</div>;
 
@@ -137,8 +143,11 @@ Provide a comprehensive, highly encouraging 2-3 paragraph summary of how they di
     playTTS(question);
   };
   
-  const handleSubmit = async () => {
-    if (!answer.trim()) return;
+  const handleSubmit = async (overrideAnswer = null) => {
+    const finalAnswer = overrideAnswer !== null ? overrideAnswer : answer;
+    if (!finalAnswer.trim()) return;
+    setAnswer(finalAnswer);
+
     setIsEvaluating(true);
     setTimerActive(false);
     setFeedback("");
@@ -153,7 +162,7 @@ IMPORTANT: Always provide 1 or 2 specific, quoted examples of what a perfect, po
 
 There is a strict 60-second timer for each question to simulate real-world time pressure in conversations. Do not penalize the user for any kind of spelling or grammatical errors, repetition, or filler words caused by this timer constraint or from speaking their answer out loud.`;
 
-    const userPrompt = `Question: ${question}\nMy Answer: ${answer}`;
+    const userPrompt = `Question: ${question}\nMy Answer: ${finalAnswer}`;
 
     try {
       let accumulatedFeedback = "";
@@ -228,12 +237,13 @@ There is a strict 60-second timer for each question to simulate real-world time 
         {!feedback && (
           <div style={{ display: 'flex', gap: '15px' }}>
             <button 
-              className="btn btn-secondary" 
-              onClick={handleRecord} 
-              title="Speak your answer"
-              style={{ padding: '12px', borderRadius: '50%' }}
+              className={`btn ${isRecording ? 'btn-primary' : 'btn-secondary'}`} 
+              onClick={toggleRecording} 
+              title={isRecording ? "Stop Recording" : "Speak your answer"}
+              style={{ padding: '12px', borderRadius: '50%', background: isRecording ? 'var(--secondary)' : '', border: isRecording ? 'none' : '' }}
+              disabled={isEvaluating || isTranscribing}
             >
-              <Mic size={24} />
+              {isTranscribing ? <Loader2 size={24} className="spin" color="var(--primary)" /> : <Mic size={24} color={isRecording ? 'white' : 'var(--primary)'} />}
             </button>
 
             <button 

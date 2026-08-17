@@ -1,10 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Send, Mic, Volume2 } from 'lucide-react';
+import { Send, Mic, Volume2, Loader2 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 import { chatCompletion, streamChatCompletion } from '../utils/api';
 import { getSystemPrompt } from '../utils/data';
 import { playTTS } from '../utils/tts';
+import useAudioRecorder from '../hooks/useAudioRecorder';
 
 export default function Chatbot({ profile, setProfile }) {
   const navigate = useNavigate();
@@ -18,6 +19,11 @@ export default function Chatbot({ profile, setProfile }) {
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
+
+  const { isRecording, isTranscribing, toggleRecording } = useAudioRecorder({
+    onSuccess: (text) => setInput(prev => prev + (prev ? " " : "") + text),
+    onError: (err) => alert("Transcription Error: " + err)
+  });
   const messagesEndRef = useRef(null);
   const hasSavedRef = useRef(false);
   const messagesRef = useRef(messages);
@@ -154,11 +160,6 @@ Output ONLY the updated paragraph of notes. No intro, no outro.`;
     };
   }, []);
 
-  // Mock function for WASM Whisper
-  const handleRecord = () => {
-    alert("Whisper.cpp WASM STT will start listening here!");
-  };
-
   // Mock function for Piper TTS
   const handleSpeak = (text) => {
     playTTS(text);
@@ -219,8 +220,14 @@ Output ONLY the updated paragraph of notes. No intro, no outro.`;
       </div>
 
       <div style={{ padding: '20px', borderTop: '1px solid var(--glass-border)', display: 'flex', gap: '12px', background: 'rgba(255,255,255,0.3)', borderRadius: '0 0 24px 24px' }}>
-        <button className="btn btn-secondary" style={{ padding: '12px', borderRadius: '50%' }} onClick={handleRecord} title="Record Voice (Whisper)">
-          <Mic size={20} />
+        <button 
+          className={`btn ${isRecording ? 'btn-primary' : 'btn-secondary'}`} 
+          style={{ padding: '12px', borderRadius: '50%', background: isRecording ? 'var(--secondary)' : '', border: isRecording ? 'none' : '' }} 
+          onClick={toggleRecording} 
+          title={isRecording ? "Stop Recording" : "Record Voice"}
+          disabled={isLoading || isSaving || isTranscribing}
+        >
+          {isTranscribing ? <Loader2 size={20} className="spin" color="var(--primary)" /> : <Mic size={20} color={isRecording ? 'white' : 'var(--primary)'} />}
         </button>
         <input 
           type="text" 
