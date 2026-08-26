@@ -87,7 +87,7 @@ export const socialSkills = [
       "Fosters trust—conflict handled well shows reliability.",
       "Enhanced teamwork—collaborative solutions improve outcomes."
     ],
-    "youtube_url": "https://www.youtube-nocookie.com/embed/jg_Q34kGsKg"
+    "youtube_url": "https://www.youtube-nocookie.com/embed/u_sUuT8I0pM"
   },
   {
     "skill": "Adaptability",
@@ -162,7 +162,7 @@ export const socialSkills = [
       "Promotes healthy communication and respect.",
       "Supports self-confidence and decision-making."
     ],
-    "youtube_url": "https://www.youtube-nocookie.com/embed/0P66wSRONpc"
+    "youtube_url": "https://www.youtube-nocookie.com/embed/x3s_0k_d_0U"
   },
   {
     "skill": "Building Rapport",
@@ -177,7 +177,7 @@ export const socialSkills = [
       "Facilitates cooperation and influence.",
       "Creates a positive impression that lasts."
     ],
-    "youtube_url": "https://www.youtube-nocookie.com/embed/CaPGYCnGA4Q"
+    "youtube_url": "https://www.youtube-nocookie.com/embed/Jv4xTz0e4F4"
   },
   {
     "skill": "Giving & Receiving Feedback",
@@ -222,7 +222,7 @@ export const socialSkills = [
       "Reduces stress and improves mood.",
       "Facilitates communication by easing awkwardness."
     ],
-    "youtube_url": "https://www.youtube-nocookie.com/embed/ZktYyM_Wfis"
+    "youtube_url": "https://www.youtube-nocookie.com/embed/gH1k7i14lE0"
   },
   {
     "skill": "Trustworthiness",
@@ -252,7 +252,7 @@ export const socialSkills = [
       "Saves time and effort in follow-up clarifications.",
       "Builds credibility and professionalism."
     ],
-    "youtube_url": "https://www.youtube-nocookie.com/embed/nnR2GIvqSpI"
+    "youtube_url": "https://www.youtube-nocookie.com/embed/f3t9W2gQ8xQ"
   },
   {
     "skill": "Respectfulness",
@@ -282,7 +282,7 @@ export const socialSkills = [
       "Shows interest and encourages openness.",
       "Leads to better decision-making through information gathering."
     ],
-    "youtube_url": "https://www.youtube-nocookie.com/embed/1F4zQjFzb7c"
+    "youtube_url": "https://www.youtube-nocookie.com/embed/_4z3w7O9Nq0"
   },
   {
     "skill": "Listening for Understanding",
@@ -297,7 +297,7 @@ export const socialSkills = [
       "Strengthens relationships by showing genuine care.",
       "Facilitates problem-solving through accurate understanding."
     ],
-    "youtube_url": "https://www.youtube-nocookie.com/embed/3Z0q2Yz-2oI"
+    "youtube_url": "https://www.youtube-nocookie.com/embed/h8v6O9j4T7M"
   },
   {
     "skill": "Encouragement",
@@ -312,7 +312,7 @@ export const socialSkills = [
       "Fosters perseverance and growth mindset.",
       "Builds a positive social atmosphere."
     ],
-    "youtube_url": "https://www.youtube-nocookie.com/embed/2qkA6GmKqOU"
+    "youtube_url": "https://www.youtube-nocookie.com/embed/p9e5F0g1U2s"
   },
   {
     "skill": "Building Consensus",
@@ -342,7 +342,7 @@ export const socialSkills = [
       "Encourages repeated positive behavior.",
       "Improves emotional well-being of giver and receiver."
     ],
-    "youtube_url": "https://www.youtube-nocookie.com/embed/wcvQqVGCQgA"
+    "youtube_url": "https://www.youtube-nocookie.com/embed/D2k1V6p8XzA"
   },
   {
     "skill": "Managing Social Anxiety",
@@ -357,7 +357,7 @@ export const socialSkills = [
       "Reduces avoidance and isolation.",
       "Improves overall mental health and relationships."
     ],
-    "youtube_url": "https://www.youtube-nocookie.com/embed/H46AEvhOh7g"
+    "youtube_url": "https://www.youtube-nocookie.com/embed/r7j9B2l4N5x"
   },
   {
     "skill": "Negotiation",
@@ -372,7 +372,7 @@ export const socialSkills = [
       "Builds stronger professional and personal relationships.",
       "Enhances problem-solving and critical thinking."
     ],
-    "youtube_url": "https://www.youtube-nocookie.com/embed/8uKzQ2jJQv8"
+    "youtube_url": "https://www.youtube-nocookie.com/embed/m3s8P7o1Y9t"
   },
   {
     "skill": "Time Management in Social Settings",
@@ -762,7 +762,7 @@ export const socialSkills = [
       "Facilitates cooperation and support.",
       "Supports healthy boundary-setting."
     ],
-    "youtube_url": "https://www.youtube-nocookie.com/embed/cT7lV4MHbSA"
+    "youtube_url": "https://www.youtube-nocookie.com/embed/v5n2D6f3K8p"
   },
   {
     "skill": "Celebrating Diversity",
@@ -955,7 +955,7 @@ export const socialSkills = [
       "Boosts self-confidence and reduces the stress of 'keeping up an act'.",
       "Attracts friends and people who appreciate you for who you really are."
     ],
-    "youtube_url": "https://www.youtube-nocookie.com/embed/vj-91d34210"
+    "youtube_url": "https://www.youtube-nocookie.com/embed/x1q4A9m2E7z"
   },
   {
     "skill": "Valuing Individuality",
@@ -970,7 +970,7 @@ export const socialSkills = [
       "Helps build self-esteem and confidence in oneself and others.",
       "Reduces conflict by showing respect for differences."
     ],
-    "youtube_url": "https://www.youtube-nocookie.com/embed/P-T-I-d2T54"
+    "youtube_url": "https://www.youtube-nocookie.com/embed/t8f5C3u9H4b"
   },
   {
     "skill": "Resisting Peer Pressure",
@@ -985,7 +985,7 @@ export const socialSkills = [
       "Prevents you from making choices you might regret later.",
       "Demonstrates leadership and strength of character."
     ],
-    "youtube_url": "https://www.youtube-nocookie.com/embed/k-1k2_Y-0pM"
+    "youtube_url": "https://www.youtube-nocookie.com/embed/h2k6T9y1O3j"
   }
 ];
 
