@@ -28,3 +28,5 @@ scratch/check_videos.js
 scratch/search_replacements.js
 server/index.js
 server/profiles.db
+android/
+capacitor.config.json

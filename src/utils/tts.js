@@ -1,3 +1,6 @@
+import { Capacitor } from '@capacitor/core';
+import { TextToSpeech } from '@capacitor-community/text-to-speech';
+
 const API_BASE = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3001/api';
 
 let currentAudio = null;
@@ -7,6 +10,12 @@ export async function playTTS(text) {
   if (currentAudio) {
     currentAudio.pause();
     currentAudio = null;
+  }
+  
+  if (Capacitor.isNativePlatform()) {
+    try { await TextToSpeech.stop(); } catch(e) {}
+  } else if ('speechSynthesis' in window) {
+    window.speechSynthesis.cancel();
   }
 
   try {
@@ -34,7 +43,25 @@ export async function playTTS(text) {
 
     await currentAudio.play();
   } catch (error) {
-    console.error("Error generating or playing TTS:", error);
-    alert("Error playing TTS: " + error.message);
+    console.log("Backend TTS failed, falling back to local TTS engine:", error.message);
+    
+    if (Capacitor.isNativePlatform()) {
+      try {
+        await TextToSpeech.speak({
+          text: text,
+          lang: 'en-US',
+          rate: 1.0,
+          pitch: 1.0,
+          volume: 1.0,
+        });
+      } catch (nativeError) {
+        console.error("Native TTS error:", nativeError);
+      }
+    } else if ('speechSynthesis' in window) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      window.speechSynthesis.speak(utterance);
+    } else {
+      console.error("No TTS fallback available.");
+    }
   }
 }
