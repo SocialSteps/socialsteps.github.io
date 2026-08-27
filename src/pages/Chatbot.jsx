@@ -7,7 +7,7 @@ import { getSystemPrompt } from '../utils/data';
 import { playTTS } from '../utils/tts';
 import useAudioRecorder from '../hooks/useAudioRecorder';
 
-export default function Chatbot({ profile, setProfile }) {
+export default function Chatbot({ profile, setProfile, gamification }) {
   const navigate = useNavigate();
   const [messages, setMessages] = useState([
     { 
@@ -54,6 +54,14 @@ export default function Chatbot({ profile, setProfile }) {
     setIsLoading(true);
 
     try {
+      if (gamification) {
+        const today = new Date().toISOString().split('T')[0];
+        const messagesToday = await gamification.incrementStat(`chatbot_msgs_${today}`);
+        if (messagesToday <= 5) {
+          gamification.addXP(10);
+        }
+      }
+
       let accumulatedText = "";
       await streamChatCompletion(
         newMessages,

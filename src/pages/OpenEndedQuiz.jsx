@@ -6,7 +6,7 @@ import { Play, RefreshCw, Mic, Volume2, Timer, Loader2 } from 'lucide-react';
 import { playTTS } from '../utils/tts';
 import useAudioRecorder from '../hooks/useAudioRecorder';
 
-export default function OpenEndedQuiz({ profile }) {
+export default function OpenEndedQuiz({ profile, gamification }) {
   const [quizQuestions, setQuizQuestions] = useState([]);
   const [currentIdx, setCurrentIdx] = useState(0);
   const [isFinished, setIsFinished] = useState(false);
@@ -177,6 +177,9 @@ There is a strict 60-second timer for each question to simulate real-world time 
         },
         () => {
           setIsEvaluating(false);
+          if (gamification) {
+            gamification.addXP(20);
+          }
         }
       );
     } catch (e) {
@@ -263,6 +266,7 @@ There is a strict 60-second timer for each question to simulate real-world time 
             <div className="chat-markdown" style={{ fontSize: '1.2rem', lineHeight: '1.6', marginBottom: '25px', color: 'var(--text-main)' }}>
               <ReactMarkdown>{feedback}</ReactMarkdown>
             </div>
+            {gamification && !isEvaluating && <p style={{ fontSize: '1.1rem', color: 'var(--accent)', fontWeight: 'bold', marginBottom: '15px' }}>+20 XP Earned!</p>}
             {!isEvaluating && (
               <button className="btn btn-primary" onClick={nextQuestion} style={{ fontSize: '1.1rem', padding: '12px 30px' }}>
                 {currentIdx + 1 < quizQuestions.length ? 'Next Question →' : 'Finish Quiz'}

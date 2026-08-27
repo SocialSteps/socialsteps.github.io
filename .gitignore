@@ -22,3 +22,9 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+replacements.json
+scratch/apply_replacements.js
+scratch/check_videos.js
+scratch/search_replacements.js
+server/index.js
+server/profiles.db

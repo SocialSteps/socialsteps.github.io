@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import ReactMarkdown from 'react-markdown';
+import Confetti from 'react-confetti';
 import { streamChatCompletion } from '../utils/api';
 
-export default function Quiz({ title, questions, profile }) {
+export default function Quiz({ title, questions, profile, gamification }) {
   const [currentIdx, setCurrentIdx] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [showResult, setShowResult] = useState(false);
@@ -46,6 +47,12 @@ export default function Quiz({ title, questions, profile }) {
       setExplanationRequested(false);
     } else {
       setIsFinished(true);
+      if (gamification) {
+        gamification.addXP(20);
+        if (score === quizQuestions.length) {
+          gamification.unlockBadge("Perfect Score");
+        }
+      }
     }
   };
 
@@ -66,6 +73,13 @@ export default function Quiz({ title, questions, profile }) {
     setExplanationRequested(true);
     setIsExplaining(true);
     setDetailedExplanation("");
+
+    if (gamification) {
+      const clicks = await gamification.incrementStat("explainMoreClicks");
+      if (clicks === 5) {
+        gamification.unlockBadge("Curious Learner");
+      }
+    }
 
     const systemPrompt = `You are a gentle, supportive tutor helping ${profile?.name || 'a user'} learn social skills. They are ${profile?.age || 'unknown'} years old. Their strengths include ${profile?.strengths || 'nothing specified'}. They want to improve on ${profile?.improve || 'nothing specified'}. The user has just answered a multiple-choice question.
 If they got it wrong, gently explain why the correct answer is right and why their choice was incorrect. Never make them feel bad.
@@ -110,8 +124,10 @@ Keep your explanation simple, clear, and encouraging. Use short paragraphs and p
 
     return (
       <div className="glass-panel animate-fade-in" style={{ padding: '60px', minHeight: '100%', height: 'max-content', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+        {score === quizQuestions.length && <Confetti width={window.innerWidth} height={window.innerHeight} recycle={false} numberOfPieces={500} />}
         <h2 style={{ fontSize: '3.5rem', marginBottom: '20px', color: 'var(--primary)' }}>Quiz Complete! 🎉</h2>
-        <h3 style={{ fontSize: '2.5rem', marginBottom: '20px', color: 'var(--text-main)' }}>You scored {score} out of {quizQuestions.length}</h3>
+        <h3 style={{ fontSize: '2.5rem', marginBottom: '10px', color: 'var(--text-main)' }}>You scored {score} out of {quizQuestions.length}</h3>
+        {gamification && <p style={{ fontSize: '1.2rem', color: 'var(--accent)', fontWeight: 'bold', marginBottom: '20px' }}>+20 XP Earned!</p>}
         <p style={{ fontSize: '1.5rem', marginBottom: '50px', color: 'var(--text-main)', maxWidth: '800px', lineHeight: '1.6' }}>{guidance}</p>
         <button className="btn btn-primary" onClick={restart} style={{ fontSize: '1.2rem', padding: '15px 40px' }}>Play Again 🔄</button>
       </div>
