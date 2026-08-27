@@ -1,4 +1,5 @@
 import { useCallback } from 'react';
+import { saveLocalProfile } from '../utils/db';
 
 const API_URL = import.meta.env.VITE_API_BASE_URL || '/api';
 
@@ -35,6 +36,7 @@ export function useGamification(profile, setProfile) {
       
       const updated = { ...profile, streak: newStreak, lastActiveDate: today, badges: newBadgesStr };
       setProfile(updated);
+      await saveLocalProfile(updated);
       
       try {
         await fetch(`${API_URL}/profiles/${profile.passwordKey}/gamification`, {
@@ -53,6 +55,7 @@ export function useGamification(profile, setProfile) {
     const newXP = (profile.xp || 0) + amount;
     const updated = { ...profile, xp: newXP };
     setProfile(updated);
+    await saveLocalProfile(updated);
     
     try {
       await fetch(`${API_URL}/profiles/${profile.passwordKey}/gamification`, {
@@ -77,6 +80,7 @@ export function useGamification(profile, setProfile) {
       const newBadgesStr = JSON.stringify(badges);
       const updated = { ...profile, badges: newBadgesStr };
       setProfile(updated);
+      await saveLocalProfile(updated);
       
       try {
         await fetch(`${API_URL}/profiles/${profile.passwordKey}/gamification`, {
@@ -103,6 +107,7 @@ export function useGamification(profile, setProfile) {
     const newStatsStr = JSON.stringify(stats);
     const updated = { ...profile, stats: newStatsStr };
     setProfile(updated);
+    await saveLocalProfile(updated);
     
     try {
       await fetch(`${API_URL}/profiles/${profile.passwordKey}/gamification`, {

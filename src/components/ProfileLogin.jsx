@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Cat, Dog, Rabbit, Bird, Turtle, Snail, Fish, Bug, UserCircle2 } from 'lucide-react';
+import { getLocalProfiles, saveLocalProfile } from '../utils/db';
 
 const animals = [
   { id: 'cat', icon: Cat, label: 'Cat' },
@@ -41,28 +42,46 @@ export default function ProfileLogin({ onLogin }) {
   useEffect(() => {
     const migrateProfiles = async () => {
       const API_BASE = import.meta.env.VITE_API_BASE_URL || '/api';
-      const stored = localStorage.getItem('socialsteps_profiles');
-      if (stored) {
+      const profiles = await getLocalProfiles();
+      
+      if (Object.keys(profiles).length > 0) {
         try {
-          const profiles = JSON.parse(stored);
           for (const key in profiles) {
             const p = profiles[key];
-            const passwordKey = `${p.name.toLowerCase().trim()}-${p.animal}-${p.color}`;
-            await fetch(`${API_BASE}/profiles/register`, {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ ...p, passwordKey })
-            });
-            if (p.notes) {
-              await fetch(`${API_BASE}/profiles/${passwordKey}`, {
+            const passwordKey = p.passwordKey || `${p.name.toLowerCase().trim()}-${p.animal}-${p.color}`;
+            
+            // Try to sync with backend
+            try {
+              await fetch(`${API_BASE}/profiles/register`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ ...p, passwordKey })
+              });
+              
+              await fetch(`${API_BASE}/profiles/${passwordKey}/gamification`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ notes: p.notes })
+                body: JSON.stringify({ 
+                  streak: p.streak, 
+                  xp: p.xp, 
+                  lastActiveDate: p.lastActiveDate,
+                  badges: p.badges,
+                  stats: p.stats
+                })
               });
+              
+              if (p.notes) {
+                await fetch(`${API_BASE}/profiles/${passwordKey}`, {
+                  method: 'PUT',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({ notes: p.notes })
+                });
+              }
+            } catch(e) {
+              // Ignore individual sync errors (probably offline)
             }
           }
-          localStorage.removeItem('socialsteps_profiles');
-          console.log("Migration complete");
+          console.log("Migration/Sync complete");
         } catch (e) {
           console.error("Failed to migrate profiles", e);
         }
@@ -123,45 +142,74 @@ export default function ProfileLogin({ onLogin }) {
     }
 
     const passwordKey = `${name.toLowerCase().trim()}-${selectedAnimal}-${selectedColor}`;
-
     const API_BASE = import.meta.env.VITE_API_BASE_URL || '/api';
+    
     try {
       if (authMode === 'register') {
-        const res = await fetch(`${API_BASE}/profiles/register`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            passwordKey,
-            name,
-            age,
-            likes,
-            strengths,
-            weaknesses,
-            animal: selectedAnimal,
-            color: selectedColor
-          })
-        });
-        if (!res.ok) throw new Error("Failed to register");
-        const newProfile = await res.json();
-        onLogin(newProfile);
-      } else {
-        const res = await fetch(`${API_BASE}/profiles/login`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ passwordKey })
-        });
+        const newProfile = {
+          passwordKey,
+          name,
+          age,
+          likes,
+          strengths,
+          weaknesses,
+          animal: selectedAnimal,
+          color: selectedColor,
+          xp: 0,
+          streak: 0
+        };
         
-        if (res.ok) {
-          const profile = await res.json();
-          onLogin(profile);
-        } else if (res.status === 404) {
-          setError("We couldn't find a profile with that animal and color. Try again or create a new profile.");
+        try {
+          const res = await fetch(`${API_BASE}/profiles/register`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(newProfile)
+          });
+          if (res.ok) {
+            const serverProfile = await res.json();
+            await saveLocalProfile(serverProfile);
+            onLogin(serverProfile);
+            return;
+          }
+        } catch (e) {
+          // Fallback to offline registration
+          console.log("Offline registration fallback");
+        }
+        
+        await saveLocalProfile(newProfile);
+        onLogin(newProfile);
+
+      } else {
+        try {
+          const res = await fetch(`${API_BASE}/profiles/login`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ passwordKey })
+          });
+          
+          if (res.ok) {
+            const profile = await res.json();
+            await saveLocalProfile(profile);
+            onLogin(profile);
+            return;
+          } else if (res.status === 404) {
+            setError("We couldn't find a profile with that animal and color. Try again or create a new profile.");
+            return;
+          }
+        } catch (e) {
+          // Fallback to offline login
+          console.log("Offline login fallback");
+        }
+        
+        const localProfiles = await getLocalProfiles();
+        if (localProfiles[passwordKey]) {
+          onLogin(localProfiles[passwordKey]);
         } else {
-          throw new Error("Failed to login");
+          setError("We couldn't find a profile offline. You may need an internet connection to sync.");
         }
       }
     } catch (err) {
-      setError("Server error: " + err.message);
+      setError("Error: " + err.message);
     }
   };
 
