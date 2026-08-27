@@ -59,6 +59,9 @@ export default function OpenEndedQuiz({ profile, gamification }) {
     } else {
       setIsFinished(true);
       generateFinalSummary(newHistory);
+      if (gamification) {
+        gamification.unlockBadge("Open Mind");
+      }
     }
   };
 

@@ -24,14 +24,23 @@ export function useGamification(profile, setProfile) {
         newStreak = 1; // First day
       }
       
-      const updated = { ...profile, streak: newStreak, lastActiveDate: today };
+      let currentBadges = [];
+      try { currentBadges = JSON.parse(profile.badges || '[]'); } catch(e) {}
+      
+      let newBadgesStr = profile.badges;
+      if (newStreak >= 7 && !currentBadges.includes("Dedicated")) {
+        currentBadges.push("Dedicated");
+        newBadgesStr = JSON.stringify(currentBadges);
+      }
+      
+      const updated = { ...profile, streak: newStreak, lastActiveDate: today, badges: newBadgesStr };
       setProfile(updated);
       
       try {
         await fetch(`${API_URL}/profiles/${profile.passwordKey}/gamification`, {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ streak: newStreak, lastActiveDate: today })
+          body: JSON.stringify({ streak: newStreak, lastActiveDate: today, badges: newBadgesStr })
         });
       } catch (e) {
         console.error("Failed to sync gamification", e);

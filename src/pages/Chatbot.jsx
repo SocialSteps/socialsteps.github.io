@@ -60,6 +60,11 @@ export default function Chatbot({ profile, setProfile, gamification }) {
         if (messagesToday <= 5) {
           gamification.addXP(10);
         }
+        
+        const lifetimeMessages = await gamification.incrementStat('total_chatbot_msgs');
+        if (lifetimeMessages >= 20) {
+          gamification.unlockBadge("Chatterbox");
+        }
       }
 
       let accumulatedText = "";

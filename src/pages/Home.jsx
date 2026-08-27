@@ -10,7 +10,10 @@ export default function Home({ profile }) {
 
   const badgeDefinitions = [
     { id: 'Perfect Score', icon: <Award size={32} />, desc: 'Score 100% on a quiz' },
-    { id: 'Curious Learner', icon: <Brain size={32} />, desc: 'Use Explain More 5 times' }
+    { id: 'Curious Learner', icon: <Brain size={32} />, desc: 'Use Explain More 5 times' },
+    { id: 'Chatterbox', icon: <MessageCircle size={32} />, desc: 'Send 20 messages to the Chatbot' },
+    { id: 'Open Mind', icon: <PenTool size={32} />, desc: 'Complete an Open-Ended Quiz' },
+    { id: 'Dedicated', icon: <Flame size={32} />, desc: 'Reach a 7-day streak' }
   ];
 
   return (
