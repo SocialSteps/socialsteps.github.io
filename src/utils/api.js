@@ -51,7 +51,7 @@ export async function chatCompletion(messages, model = "moonshotai/kimi-k3") {
   return data.choices[0].message.content;
 }
 
-export async function streamChatCompletion(messages, onChunk, onDone, model = "nvidia/llama-3.3-nemotron-super-49b-v1.5") {
+export async function streamChatCompletion(messages, onChunk, onDone, model = "moonshotai/kimi-k3") {
   try {
     const response = await fetch(NVIDIA_API_URL, {
       method: "POST",
