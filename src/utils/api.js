@@ -64,7 +64,8 @@ export async function streamChatCompletion(messages, onChunk, onDone, model = "m
         messages: messages,
         temperature: 0.7,
         max_tokens: 1024,
-        stream: true
+        stream: true,
+        reasoning_effort: "low"
       })
     });
 
