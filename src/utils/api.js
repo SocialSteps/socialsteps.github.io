@@ -1,7 +1,7 @@
 export const NVIDIA_API_KEY = "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";
 export const NVIDIA_API_URL = `${import.meta.env.VITE_API_BASE_URL || '/api'}/nvidia/v1/chat/completions`;
 
-export async function generateCompletion(systemPrompt, userPrompt, model = "moonshotai/kimi-k3") {
+export async function generateCompletion(systemPrompt, userPrompt, model = "deepseek-ai/deepseek-v4.1-flash") {
   const response = await fetch(NVIDIA_API_URL, {
     method: "POST",
     headers: {
@@ -27,7 +27,7 @@ export async function generateCompletion(systemPrompt, userPrompt, model = "moon
   return data.choices[0].message.content;
 }
 
-export async function chatCompletion(messages, model = "moonshotai/kimi-k3") {
+export async function chatCompletion(messages, model = "deepseek-ai/deepseek-v4.1-flash") {
   const response = await fetch(NVIDIA_API_URL, {
     method: "POST",
     headers: {
@@ -39,6 +39,7 @@ export async function chatCompletion(messages, model = "moonshotai/kimi-k3") {
       messages: messages,
       temperature: 0.7,
       max_tokens: 1024,
+      top_p: 0.95
     })
   });
 
@@ -51,7 +52,7 @@ export async function chatCompletion(messages, model = "moonshotai/kimi-k3") {
   return data.choices[0].message.content;
 }
 
-export async function streamChatCompletion(messages, onChunk, onDone, model = "moonshotai/kimi-k3") {
+export async function streamChatCompletion(messages, onChunk, onDone, model = "deepseek-ai/deepseek-v4.1-flash") {
   try {
     const response = await fetch(NVIDIA_API_URL, {
       method: "POST",
@@ -65,7 +66,7 @@ export async function streamChatCompletion(messages, onChunk, onDone, model = "m
         temperature: 0.7,
         max_tokens: 1024,
         stream: true,
-        reasoning_effort: "low"
+        top_p: 0.95
       })
     });
 
